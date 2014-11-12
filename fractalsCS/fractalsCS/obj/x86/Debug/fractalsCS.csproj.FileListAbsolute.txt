@@ -1,0 +1,8 @@
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\bin\x86\Debug\fractalsCS.exe
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\bin\x86\Debug\fractalsCS.pdb
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.Form1.resources
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.Properties.Resources.resources
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.csproj.GenerateResource.Cache
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.exe
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.pdb
+C:\Users\slash1990\Google Drive\Studium\Master\Internationale Medieninformatik HTW\Moduls\FS 2\Algorithms\elas\#2 Fractals\fractalsCS\fractalsCS\fractalsCS\obj\x86\Debug\fractalsCS.csprojResolveAssemblyReference.cache
