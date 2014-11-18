@@ -1,0 +1,9 @@
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Homework1.csprojResolveAssemblyReference.cache
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Algorithms_Euclid.Properties.Resources.resources
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Homework1.csproj.GenerateResource.Cache
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Algorithms_Euclid.exe
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Algorithms_Euclid.pdb
+C:\g3\Algorithms\homework1\Algorithms_Euclid\bin\Debug\Algorithms_Euclid.exe.config
+C:\g3\Algorithms\homework1\Algorithms_Euclid\bin\Debug\Algorithms_Euclid.exe
+C:\g3\Algorithms\homework1\Algorithms_Euclid\bin\Debug\Algorithms_Euclid.pdb
+C:\g3\Algorithms\homework1\Algorithms_Euclid\obj\Debug\Algorithms_Euclid.EvaluationForm.resources
