@@ -1,4 +1,4 @@
-﻿namespace Algorithms_Euclid
+﻿namespace Homework1
 {
     partial class EvaluationForm
     {
@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textNumberLoops = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnStartEvaluation = new System.Windows.Forms.Button();
             this.textMaximumRandomNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,8 +54,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textNumberLoops);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.btnStartEvaluation);
             this.panel1.Controls.Add(this.textMaximumRandomNumber);
             this.panel1.Controls.Add(this.label3);
@@ -67,37 +63,18 @@
             this.panel1.Controls.Add(this.textNumberRandomPairs);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(246, 165);
+            this.panel1.Size = new System.Drawing.Size(246, 141);
             this.panel1.TabIndex = 0;
-            // 
-            // textNumberLoops
-            // 
-            this.textNumberLoops.Enabled = false;
-            this.textNumberLoops.Location = new System.Drawing.Point(176, 105);
-            this.textNumberLoops.Name = "textNumberLoops";
-            this.textNumberLoops.Size = new System.Drawing.Size(51, 20);
-            this.textNumberLoops.TabIndex = 8;
-            this.textNumberLoops.Text = "1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Number of loops:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // btnStartEvaluation
             // 
-            this.btnStartEvaluation.Location = new System.Drawing.Point(12, 134);
+            this.btnStartEvaluation.Location = new System.Drawing.Point(12, 108);
             this.btnStartEvaluation.Name = "btnStartEvaluation";
             this.btnStartEvaluation.Size = new System.Drawing.Size(109, 23);
             this.btnStartEvaluation.TabIndex = 6;
             this.btnStartEvaluation.Text = "Start Evaluation";
             this.btnStartEvaluation.UseVisualStyleBackColor = true;
-            this.btnStartEvaluation.Click += new System.EventHandler(this.btnStartEvaluation_Click_1);
+            this.btnStartEvaluation.Click += new System.EventHandler(this.btnStartEvaluation_Click);
             // 
             // textMaximumRandomNumber
             // 
@@ -105,7 +82,7 @@
             this.textMaximumRandomNumber.Name = "textMaximumRandomNumber";
             this.textMaximumRandomNumber.Size = new System.Drawing.Size(51, 20);
             this.textMaximumRandomNumber.TabIndex = 5;
-            this.textMaximumRandomNumber.Text = "100000";
+            this.textMaximumRandomNumber.Text = "20";
             // 
             // label3
             // 
@@ -122,7 +99,7 @@
             this.textMinimumRandomNumber.Name = "textMinimumRandomNumber";
             this.textMinimumRandomNumber.Size = new System.Drawing.Size(38, 20);
             this.textMinimumRandomNumber.TabIndex = 3;
-            this.textMinimumRandomNumber.Text = "10000";
+            this.textMinimumRandomNumber.Text = "10";
             // 
             // label2
             // 
@@ -139,9 +116,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Number of random pairs: ";
+            this.label1.Text = "Number of inputs: ";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textNumberRandomPairs
@@ -150,7 +127,7 @@
             this.textNumberRandomPairs.Name = "textNumberRandomPairs";
             this.textNumberRandomPairs.Size = new System.Drawing.Size(38, 20);
             this.textNumberRandomPairs.TabIndex = 0;
-            this.textNumberRandomPairs.Text = "1000";
+            this.textNumberRandomPairs.Text = "3";
             // 
             // textAnalysis
             // 
@@ -162,16 +139,16 @@
             // 
             // evaluationChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.evaluationChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.evaluationChart.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.evaluationChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.evaluationChart.Legends.Add(legend1);
             this.evaluationChart.Location = new System.Drawing.Point(12, 262);
             this.evaluationChart.Name = "evaluationChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.evaluationChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.evaluationChart.Series.Add(series1);
             this.evaluationChart.Size = new System.Drawing.Size(1001, 548);
             this.evaluationChart.TabIndex = 10;
             this.evaluationChart.Text = "chartNumberOfSteps";
@@ -285,8 +262,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboDiagramMethods;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textNumberLoops;
         private System.Windows.Forms.Button btnComputingTimesTicks;
         private System.Windows.Forms.Button btnHistogramTicks;
     }

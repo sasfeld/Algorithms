@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms_Euclid
+namespace Homework1
 {
     public class Evaluation
     {
@@ -12,27 +12,13 @@ namespace Algorithms_Euclid
         /// Container object which keeps the evaluation data for a single evaluated GCD algorithm.
         /// </summary>
         public class MethodEvaluationData {
-            protected SortedDictionary<int, long> timesInMilliseconds;
             protected SortedDictionary<int, long> ticks;
-            protected SortedDictionary<int, long> deviations;
             protected SortedDictionary<int, int> numbersOfSteps;
-            public double allTicksMean { get; set; }
-
-            public double allTicksDeviation { get; set; }
-
-            public int numberLoops { get; set; }
 
             public MethodEvaluationData(int numberOfEvaluations)
             {
                 this.setNumbersOfSteps(new SortedDictionary<int, int>());
-                this.setTimesInMilliseconds(new SortedDictionary<int, long>());
                 this.setTicks(new SortedDictionary<int, long>());
-                this.setDeviations(new SortedDictionary<int, long>());
-            }
-
-            public void setTimeInMilliseconds(int numberOfEvaluation, long time)
-            {
-                this.timesInMilliseconds[numberOfEvaluation] = time;
             }
 
             public void setTicks(int numberOfEvaluation, long tick)
@@ -43,47 +29,22 @@ namespace Algorithms_Euclid
             public void setNumbersOfSteps(int numberOfEvaluation, int steps)
             {
                 this.numbersOfSteps[numberOfEvaluation] = steps;
-            }
-
-            public void setTimesInMilliseconds(SortedDictionary<int, long> times)
-            {
-                this.timesInMilliseconds = times;
-            }
+            }        
 
             public void setTicks(SortedDictionary<int, long> ticks)
             {
                 this.ticks = ticks;
-            }
-
-            public void setDeviations(SortedDictionary<int, long> deviations)
-            {
-                this.deviations = deviations;
-            }
-
-            public void setDeviations(int numberOfEvaluation, int deviation)
-            {
-                this.deviations[numberOfEvaluation] = deviation;
-            }
+            }           
 
             public void setNumbersOfSteps(SortedDictionary<int, int> steps)
             {
                 this.numbersOfSteps = steps;
             }
 
-            public SortedDictionary<int, long> getTimesInMilliseconds()
-            {
-                return this.timesInMilliseconds;
-            }
-
             public SortedDictionary<int, long> getTicks()
             {
                 return this.ticks;
-            }
-
-            public SortedDictionary<int, long> getDeviations()
-            {
-                return this.deviations;
-            }
+            }          
 
             public SortedDictionary<int, int> getNumbersOfSteps()
             {
@@ -118,38 +79,10 @@ namespace Algorithms_Euclid
 
                 return numberStepsHistogram;
             }
+          
 
             /// <summary>
-            /// Get a histogram of the computing time.
-            /// 
-            /// Therefore, return an array with key = computing time and value = count of the computing time.
-            /// </summary>
-            /// <returns></returns>
-            public SortedDictionary<long, int> getComputingTimeHistogram()
-            {
-                SortedDictionary<long, int> computingTimeHistogram = new SortedDictionary<long, int>();
-
-                foreach (int evaluationNumber in this.getTimesInMilliseconds().Keys)
-                {
-                    long computingTime = this.getTimesInMilliseconds()[evaluationNumber];
-
-                    // increase count if entry for number of steps exists
-                    if (computingTimeHistogram.ContainsKey(computingTime))
-                    {
-                        computingTimeHistogram[computingTime]++;
-                    }
-                    else
-                    {
-                        // otherwise set count to 1
-                        computingTimeHistogram[computingTime] = 1;
-                    }
-                }
-
-                return computingTimeHistogram;
-            }
-
-            /// <summary>
-            /// Get a histogram of the CPU ticks.
+            /// Get a normalized histogram of the CPU ticks.
             /// 
             /// Therefore, return an array with key = ticks and value = count of the tick values
             /// </summary>
@@ -174,35 +107,30 @@ namespace Algorithms_Euclid
                     }
                 }
 
+                this.normalizeHistogram(ticksHistogram, ticksHistogram.Count);
+
                 return ticksHistogram;
             }
 
-            public void calculateMeanAndDeviation()
+            /// <summary>
+            /// Normalize the given histogram.
+            /// </summary>
+            /// <param name="histogram"></param>
+            /// <param name="numberOfExperiments"></param>
+            protected void normalizeHistogram(SortedDictionary<long, int> histogram, int numberOfExperiments)
             {
-                long[] allTicks = new long[this.getTicks().Count];
-
-                int i = 0;
-                foreach (int evaluationNumber in this.getTicks().Keys)
+                foreach (long histoKey in histogram.Keys)
                 {
-                    long ticks = this.getTicks()[evaluationNumber];
-
-                    allTicks[i] = ticks;
-
-                    i++;
+                   //histogram[histoKey] = (int) histogram[histoKey] / numberOfExperiments;
                 }
-
-                this.allTicksMean = ExtendedMath.calculateMean(allTicks);
-                this.allTicksDeviation = ExtendedMath.calculateStandardDeviation(allTicks);
             }
 
         }
 
         protected HashSet<int[]> randomPairs;
-
+        protected Dictionary<ExponentialAlgorithm, MethodEvaluationData> evaluationData;
         protected System.Windows.Forms.RichTextBox infoTextBox;
-
-        public double overallStandardDeviation { get; set; }
-        public double overallMean { get; set; }
+        protected HashSet<ExponentialAlgorithm> algorithms;
 
         public Evaluation()
         {
@@ -211,7 +139,20 @@ namespace Algorithms_Euclid
 
         protected void initialize()
         {
-                  
+            this.algorithms = new HashSet<ExponentialAlgorithm>();
+            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTITATION);
+            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTITATION);
+            this.algorithms.Add(ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+        }
+
+        public HashSet<ExponentialAlgorithm> getMethodsForEvaluation()
+        {
+            return this.algorithms;
+        }
+
+        public Dictionary<ExponentialAlgorithm, MethodEvaluationData>  getEvaluationData()
+        {
+            return this.evaluationData;
         }
 
 
@@ -237,13 +178,15 @@ namespace Algorithms_Euclid
 
                 int[] pair = { denominator, nominator };
                 this.randomPairs.Add(pair);
+
+                this.addInfo("Generated pair (" + denominator + "," + nominator + ")");
             }
         }
 
         /// <summary>
         /// Get the previously generated random pairs.
         /// 
-        /// If none were generated, an exception will be thrown to ensure that multiple GCD methods use the same random pairs.
+        /// If none were generated, an exception will be thrown.
         /// </summary>
         /// <returns></returns>
         public HashSet<int[]> getRandomPairs()
@@ -267,5 +210,44 @@ namespace Algorithms_Euclid
         {
             this.infoTextBox.AppendText(info + "\n");
         }
+
+        protected void reset()
+        {
+            this.evaluationData = new Dictionary<ExponentialAlgorithm, MethodEvaluationData>();
+            foreach (ExponentialAlgorithm algo in this.getMethodsForEvaluation())
+            {
+                this.evaluationData[algo] = new MethodEvaluationData(this.getRandomPairs().Count);
+            }
+        }
+
+        public void runEvaluation()
+        {
+            this.reset();
+            this.runForEachAlgorithm();
+        }
+
+        protected void runForEachAlgorithm()
+        {
+            int[][] randomPairs = this.getRandomPairs().ToArray();
+
+            foreach (int[] randomPair in randomPairs)
+            {
+
+                foreach (ExponentialAlgorithm algorithm in this.algorithms)
+                {
+                    Exponential exponential = new Exponential();
+
+                    exponential.setAlgorithmToUse(algorithm);
+                    double result = exponential.runAlgorithm(randomPair[0], randomPair[1]);
+                    long ticks = exponential.getLastMeasuredCpuTime();
+
+                    int numberOfEvaluation = (randomPair[0] + randomPair[1]);
+                    this.evaluationData[algorithm].setTicks(numberOfEvaluation, ticks);
+
+                    this.addInfo("Calculated exponential of " + randomPair[0] + "^" + randomPair[1] + " = " + result);
+                }
+            }
+        }
+        
     }
 }
