@@ -25,6 +25,7 @@ namespace Homework1
         }
 
         protected Dictionary<ExponentialAlgorithm, Evaluation.MethodEvaluationData> evaluationData;
+        protected Exponential exponential;
 
         public EvaluationForm()
         {
@@ -51,7 +52,7 @@ namespace Homework1
             }
         }
 
-        protected HashSet<ExponentialAlgorithm> getSelectedEuclidMethodsForDiagram()
+        protected HashSet<ExponentialAlgorithm> getSelectedAlgorithms()
         {
             ComboboxItem selectedItem = (ComboboxItem)comboDiagramMethods.SelectedItem;
 
@@ -78,6 +79,16 @@ namespace Homework1
             return new Evaluation();
         }
 
+        protected Exponential getExponentialModel()
+        {
+            if (null == this.exponential)
+            {
+                this.exponential = new Exponential();
+            }
+
+            return this.exponential;
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -95,9 +106,9 @@ namespace Homework1
             evaluation.setInfoTextBox(textAnalysis);
 
             evaluation.generateRandomPairs(
-                convertToInt(textNumberRandomPairs.Text),
-                convertToInt(textMinimumRandomNumber.Text), 
-                convertToInt(textMaximumRandomNumber.Text));
+                convertToInt(textN1.Text),
+                convertToInt(textN2.Text), 
+                convertToInt(textN3.Text));
 
 
             evaluation.runEvaluation();
@@ -192,7 +203,7 @@ namespace Homework1
             evaluationChart.Series.Clear();
 
             int n = 0;
-            foreach (ExponentialAlgorithm method in getSelectedEuclidMethodsForDiagram())
+            foreach (ExponentialAlgorithm method in getSelectedAlgorithms())
             {
                 this.addTicksHistogram(evaluationChart, method, n);
 
@@ -226,6 +237,52 @@ namespace Homework1
            
         }
 
-       
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalculateX1N1_Click(object sender, EventArgs e)
+        {
+            long x1 = convertToLong(textX1.Text);
+            long n1 = convertToLong(textN1.Text);
+
+            this.calculateExponentialsAndShowResult(x1, n1);
+        }      
+
+        private void btnCalculateX2N2_Click(object sender, EventArgs e)
+        {
+            long x2 = convertToLong(textX2.Text);
+            long n2 = convertToLong(textN2.Text);
+
+            this.calculateExponentialsAndShowResult(x2, n2);
+        }
+
+        private void btnCalculateX3N3_Click(object sender, EventArgs e)
+        {
+            long x3 = convertToLong(textX3.Text);
+            long n3 = convertToLong(textN3.Text);
+
+            this.calculateExponentialsAndShowResult(x3, n3);
+        }
+
+        protected void calculateExponentialsAndShowResult(long x, long n)
+        {
+            Exponential exponentialModel = this.getExponentialModel();
+
+            foreach (ExponentialAlgorithm method in getSelectedAlgorithms())
+            {
+                exponentialModel.setAlgorithmToUse(method);
+                double exponentialResult = exponentialModel.runAlgorithm(x, n);
+
+                this.addInfo("Calculate exponential using " + method);
+                this.addInfo("Result of " + x + "^" + n + " = " + exponentialResult);
+            }
+        }       
     }
 }
