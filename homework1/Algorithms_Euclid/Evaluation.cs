@@ -14,11 +14,13 @@ namespace Homework1
         public class MethodEvaluationData {
             protected SortedDictionary<int, long> ticks;
             protected SortedDictionary<int, int> numbersOfSteps;
+            protected int numberOfLoops;
 
             public MethodEvaluationData(int numberOfEvaluations)
             {
                 this.setNumbersOfSteps(new SortedDictionary<int, int>());
                 this.setTicks(new SortedDictionary<int, long>());
+                this.numberOfLoops = numberOfEvaluations;
             }
 
             public void setTicks(int numberOfEvaluation, long tick)
@@ -49,6 +51,11 @@ namespace Homework1
             public SortedDictionary<int, int> getNumbersOfSteps()
             {
                 return this.numbersOfSteps;
+            }
+
+            public int getNumberLoops()
+            {
+                return this.numberOfLoops;
             }
 
             /// <summary>
@@ -87,14 +94,14 @@ namespace Homework1
             /// Therefore, return an array with key = ticks and value = count of the tick values
             /// </summary>
             /// <returns></returns>
-            public SortedDictionary<long, int> getTicksHistogram(bool normalize)
+            public SortedDictionary<long, double> getTicksHistogram(int experimentNumber, int numberOfLoops, bool normalize)
             {
-                SortedDictionary<long, int> ticksHistogram = new SortedDictionary<long, int>();
+                SortedDictionary<long, double> ticksHistogram = new SortedDictionary<long, double>();
 
-                foreach (int evaluationNumber in this.getTicks().Keys)
-                {
+                int maxIndex = numberOfLoops * (experimentNumber + 1);
+                for (int evaluationNumber = numberOfLoops * experimentNumber + 1; evaluationNumber <= maxIndex; evaluationNumber++) 
+                {                         
                     long ticks = this.getTicks()[evaluationNumber];
-
                     // increase count if entry for number of steps exists
                     if (ticksHistogram.ContainsKey(ticks))
                     {
@@ -102,14 +109,14 @@ namespace Homework1
                     }
                     else
                     {
-                        // otherwise set count to 1
+                       // otherwise set count to 1
                         ticksHistogram[ticks] = 1;
                     }
                 }
 
                 if (normalize)
                 {
-                    ticksHistogram = this.normalizeHistogram(ticksHistogram, ticksHistogram.Count);
+                    ticksHistogram = this.normalizeHistogram(ticksHistogram, numberOfLoops);
                 }
 
                 return ticksHistogram;
@@ -120,14 +127,14 @@ namespace Homework1
             /// </summary>
             /// <param name="histogram"></param>
             /// <param name="numberOfExperiments"></param>
-            protected SortedDictionary<long, int> normalizeHistogram(SortedDictionary<long, int> histogram, int numberOfExperiments)
+            protected SortedDictionary<long, double> normalizeHistogram(SortedDictionary<long, double> histogram, int numberOfExperiments)
             {
-                SortedDictionary<long, int> normalizedHistogram = new SortedDictionary<long, int>();
+                SortedDictionary<long, double> normalizedHistogram = new SortedDictionary<long, double>();
                 
                 foreach (long histoKey in histogram.Keys)
                 {
                     // calculate prohability (count divided by number of experiments)
-                    normalizedHistogram[histoKey] = (int) histogram[histoKey] / numberOfExperiments;
+                    normalizedHistogram[histoKey] = (histogram[histoKey] / numberOfExperiments) * numberOfExperiments;
                 }
 
                 return normalizedHistogram;
@@ -236,18 +243,18 @@ namespace Homework1
             this.infoTextBox.AppendText(info + "\n");
         }
 
-        protected void reset()
+        protected void reset(int numberOfLoops)
         {
             this.evaluationData = new Dictionary<ExponentialAlgorithm, MethodEvaluationData>();
             foreach (ExponentialAlgorithm algo in this.getMethodsForEvaluation())
             {
-                this.evaluationData[algo] = new MethodEvaluationData(this.getPairs().Count);
+                this.evaluationData[algo] = new MethodEvaluationData(numberOfLoops);
             }
         }
 
         public void runEvaluation(int numberOfLoops)
         {
-            this.reset();
+            this.reset(numberOfLoops);
             this.runForEachAlgorithm(numberOfLoops);
         }
 

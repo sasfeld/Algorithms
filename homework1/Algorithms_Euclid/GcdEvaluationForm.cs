@@ -207,35 +207,51 @@ namespace Homework1
             {
                 this.addInfo("Please start the evaluation first.");
                 return;
+            } 
+
+            if (getSelectedAlgorithms().Count > 1)
+            {
+                this.addInfo("Please select an algorithm in the dropdown.");
+                return;
             }
 
-            evaluationChart.Series.Clear();
 
-            int n = 0;
             foreach (ExponentialAlgorithm method in getSelectedAlgorithms())
             {
-                this.addTicksHistogram(evaluationChart, method, n);
+                evaluationChart.Series.Clear();
 
-                n++;
+                this.addTicksHistogram(evaluationChart, method);
             }
         }
-        protected void addTicksHistogram(Chart chart, ExponentialAlgorithm method, int seriesNumber)
+        protected void addTicksHistogram(Chart chart, ExponentialAlgorithm method)
         {
-            String seriesName = "" + method;
-
-            // prepare legend and type of chart
-            chart.Series.Add(seriesName);
-            chart.Series[seriesName].ChartType = SeriesChartType.Column;
-
-            Evaluation.MethodEvaluationData methodData = evaluationData[method];
-
-            SortedDictionary<long, int> ticksHistogram = methodData.getTicksHistogram(true);
-            // fill chart with data
-            foreach (long ticks in ticksHistogram.Keys)
+            for (int i = 1; i <= 3; i++)
             {
-                int ticksCount = ticksHistogram[ticks];
+                String seriesName = "N" + i;
 
-                chart.Series[seriesName].Points.AddXY(ticks, ticksCount);
+                // prepare legend and type of chart
+                chart.Series.Add(seriesName);
+                chart.Series[seriesName].ChartType = SeriesChartType.Column;
+
+                Evaluation.MethodEvaluationData methodData = evaluationData[method];
+
+                SortedDictionary<long, double> ticksHistogram = methodData.getTicksHistogram(i, methodData.getNumberLoops(), true);
+                // fill chart with data
+                foreach (long ticks in ticksHistogram.Keys)
+                {
+                    double ticksCount = ticksHistogram[ticks];
+
+                    long enterTicks = ticks;
+                    if (ticks == 0)
+                    {
+                        enterTicks = 50;
+                    }
+                    else if (ticks == 1)
+                    {
+                        enterTicks = 100;
+                    }
+                    chart.Series[seriesName].Points.AddXY(enterTicks, ticksCount);
+                }
             }
         }
 
