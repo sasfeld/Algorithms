@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnStartEvaluation = new System.Windows.Forms.Button();
             this.textN3 = new System.Windows.Forms.TextBox();
@@ -58,6 +58,8 @@
             this.btnCalculateX3N3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.textLoops = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evaluationChart)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +67,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.textLoops);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btnCalculateX3N3);
             this.panel1.Controls.Add(this.btnCalculateX2N2);
@@ -88,7 +92,7 @@
             // 
             // btnStartEvaluation
             // 
-            this.btnStartEvaluation.Location = new System.Drawing.Point(12, 134);
+            this.btnStartEvaluation.Location = new System.Drawing.Point(127, 141);
             this.btnStartEvaluation.Name = "btnStartEvaluation";
             this.btnStartEvaluation.Size = new System.Drawing.Size(109, 23);
             this.btnStartEvaluation.TabIndex = 6;
@@ -160,16 +164,16 @@
             // 
             // evaluationChart
             // 
-            chartArea10.Name = "ChartArea1";
-            this.evaluationChart.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            this.evaluationChart.Legends.Add(legend10);
+            chartArea1.Name = "ChartArea1";
+            this.evaluationChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.evaluationChart.Legends.Add(legend1);
             this.evaluationChart.Location = new System.Drawing.Point(12, 301);
             this.evaluationChart.Name = "evaluationChart";
-            series10.ChartArea = "ChartArea1";
-            series10.Legend = "Legend1";
-            series10.Name = "Series1";
-            this.evaluationChart.Series.Add(series10);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.evaluationChart.Series.Add(series1);
             this.evaluationChart.Size = new System.Drawing.Size(1001, 548);
             this.evaluationChart.TabIndex = 10;
             this.evaluationChart.Text = "chartNumberOfSteps";
@@ -337,6 +341,24 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "x ^ n";
             // 
+            // textLoops
+            // 
+            this.textLoops.Location = new System.Drawing.Point(66, 141);
+            this.textLoops.Name = "textLoops";
+            this.textLoops.Size = new System.Drawing.Size(43, 20);
+            this.textLoops.TabIndex = 16;
+            this.textLoops.Text = "100";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Cursor = System.Windows.Forms.Cursors.No;
+            this.label8.Location = new System.Drawing.Point(25, 144);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Loops:";
+            // 
             // EvaluationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,5 +414,7 @@
         private System.Windows.Forms.Button btnCalculateX1N1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textLoops;
+        private System.Windows.Forms.Label label8;
     }
 }

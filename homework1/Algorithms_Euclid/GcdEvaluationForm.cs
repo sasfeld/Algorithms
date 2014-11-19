@@ -79,6 +79,15 @@ namespace Homework1
             return new Evaluation();
         }
 
+        protected Evaluation getFreshEvaluationModel()
+        {
+            Evaluation model = this.getEvaluationModel();
+            model.setInfoTextBox(textAnalysis);
+            model.resetPairs();
+
+            return model;
+        }
+
         protected Exponential getExponentialModel()
         {
             if (null == this.exponential)
@@ -102,19 +111,19 @@ namespace Homework1
         private void btnStartEvaluation_Click(object sender, EventArgs e)
         {
             this.addInfo("Starting evaluation\n");
-            Evaluation evaluation = new Evaluation();
-            evaluation.setInfoTextBox(textAnalysis);
 
-            evaluation.generateRandomPairs(
-                convertToInt(textN1.Text),
-                convertToInt(textN2.Text), 
-                convertToInt(textN3.Text));
-
-
-            evaluation.runEvaluation();
+            Evaluation evaluation = this.getFreshEvaluationModel();
+            this.addInputPairs(evaluation);
+            evaluation.runEvaluation(convertToInt(textLoops.Text));
 
             this.evaluationData = evaluation.getEvaluationData();
+        }
 
+        protected void addInputPairs(Evaluation evaluation)
+        {           
+            evaluation.addPair(convertToInt(textX1.Text), convertToInt(textN1.Text));
+            evaluation.addPair(convertToInt(textX2.Text), convertToInt(textN2.Text));
+            evaluation.addPair(convertToInt(textX3.Text), convertToInt(textN3.Text));
         }
 
         protected void addInfo(String info)
@@ -220,7 +229,7 @@ namespace Homework1
 
             Evaluation.MethodEvaluationData methodData = evaluationData[method];
 
-            SortedDictionary<long, int> ticksHistogram = methodData.getTicksHistogram();
+            SortedDictionary<long, int> ticksHistogram = methodData.getTicksHistogram(true);
             // fill chart with data
             foreach (long ticks in ticksHistogram.Keys)
             {

@@ -87,7 +87,7 @@ namespace Homework1
             /// Therefore, return an array with key = ticks and value = count of the tick values
             /// </summary>
             /// <returns></returns>
-            public SortedDictionary<long, int> getTicksHistogram()
+            public SortedDictionary<long, int> getTicksHistogram(bool normalize)
             {
                 SortedDictionary<long, int> ticksHistogram = new SortedDictionary<long, int>();
 
@@ -107,7 +107,10 @@ namespace Homework1
                     }
                 }
 
-                this.normalizeHistogram(ticksHistogram, ticksHistogram.Count);
+                if (normalize)
+                {
+                    ticksHistogram = this.normalizeHistogram(ticksHistogram, ticksHistogram.Count);
+                }
 
                 return ticksHistogram;
             }
@@ -117,12 +120,17 @@ namespace Homework1
             /// </summary>
             /// <param name="histogram"></param>
             /// <param name="numberOfExperiments"></param>
-            protected void normalizeHistogram(SortedDictionary<long, int> histogram, int numberOfExperiments)
+            protected SortedDictionary<long, int> normalizeHistogram(SortedDictionary<long, int> histogram, int numberOfExperiments)
             {
+                SortedDictionary<long, int> normalizedHistogram = new SortedDictionary<long, int>();
+                
                 foreach (long histoKey in histogram.Keys)
                 {
-                   //histogram[histoKey] = (int) histogram[histoKey] / numberOfExperiments;
+                    // calculate prohability (count divided by number of experiments)
+                    normalizedHistogram[histoKey] = (int) histogram[histoKey] / numberOfExperiments;
                 }
+
+                return normalizedHistogram;
             }
 
         }
@@ -183,13 +191,32 @@ namespace Homework1
             }
         }
 
+        public void resetPairs()
+        {
+            this.randomPairs = new HashSet<int[]>();
+        }
+
+        /// <summary>
+        /// Add a new pair of int values that will be evaluated.
+        /// 
+        /// Value1 means the basis x, value2 the exponent n.
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        public void addPair(int value1, int value2)
+        {
+            int[] pair = { value1, value2 };
+            this.randomPairs.Add(pair);    
+        }
+
         /// <summary>
         /// Get the previously generated random pairs.
         /// 
         /// If none were generated, an exception will be thrown.
         /// </summary>
         /// <returns></returns>
-        public HashSet<int[]> getRandomPairs()
+        public HashSet<int[]> getPairs()
         {
             if (null == randomPairs)
             {
@@ -197,9 +224,7 @@ namespace Homework1
             }
 
             return this.randomPairs;
-        }       
-
-       
+        }              
 
         internal void setInfoTextBox(System.Windows.Forms.RichTextBox richTextBox)
         {
@@ -216,36 +241,45 @@ namespace Homework1
             this.evaluationData = new Dictionary<ExponentialAlgorithm, MethodEvaluationData>();
             foreach (ExponentialAlgorithm algo in this.getMethodsForEvaluation())
             {
-                this.evaluationData[algo] = new MethodEvaluationData(this.getRandomPairs().Count);
+                this.evaluationData[algo] = new MethodEvaluationData(this.getPairs().Count);
             }
         }
 
-        public void runEvaluation()
+        public void runEvaluation(int numberOfLoops)
         {
             this.reset();
-            this.runForEachAlgorithm();
+            this.runForEachAlgorithm(numberOfLoops);
         }
 
-        protected void runForEachAlgorithm()
+        protected void runForEachAlgorithm(int numberOfLoops)
         {
-            int[][] randomPairs = this.getRandomPairs().ToArray();
+            int[][] pairs = this.getPairs().ToArray();
 
-            foreach (int[] randomPair in randomPairs)
-            {
+            int outer = 1;
+            foreach (int[] pair in pairs)
+            {               
+              foreach (ExponentialAlgorithm algorithm in this.algorithms)
+              {
+                 this.addInfo("Evaluating " + algorithm + " for x=" + pair[0] + ", n=" + pair[1] + " " + numberOfLoops + " times");
+                 for (int i = 1; i <= numberOfLoops; i++)
+                 {
+                   Exponential exponential = new Exponential();
+                     
+                   exponential.setAlgorithmToUse(algorithm);
+                   double result = exponential.runAlgorithm(pair[0], pair[1]);
+                   long ticks = exponential.getLastMeasuredCpuTime();
 
-                foreach (ExponentialAlgorithm algorithm in this.algorithms)
-                {
-                    Exponential exponential = new Exponential();
+                   int numberOfEvaluation = outer * numberOfLoops + i;
+                   this.evaluationData[algorithm].setTicks(numberOfEvaluation, ticks);
 
-                    exponential.setAlgorithmToUse(algorithm);
-                    double result = exponential.runAlgorithm(randomPair[0], randomPair[1]);
-                    long ticks = exponential.getLastMeasuredCpuTime();
-
-                    int numberOfEvaluation = (randomPair[0] + randomPair[1]);
-                    this.evaluationData[algorithm].setTicks(numberOfEvaluation, ticks);
-
-                    this.addInfo("Calculated exponential of " + randomPair[0] + "^" + randomPair[1] + " = " + result);
-                }
+                   if (1 == i)
+                   {
+                       this.addInfo("Calculated exponential of " + pair[0] + "^" + pair[1] + " = " + result);
+                   }
+                        
+                  }
+               }
+               outer += 1;
             }
         }
         
