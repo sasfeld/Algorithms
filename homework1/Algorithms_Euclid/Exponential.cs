@@ -9,8 +9,8 @@ namespace Homework1
 {
     public enum ExponentialAlgorithm
     {
-         SIMPLE_ITERATIVE_EXPONENTITATION,
-         SIMPLE_RECURSIVE_EXPONENTITATION,
+         SIMPLE_ITERATIVE_EXPONENTIATION,
+         SIMPLE_RECURSIVE_EXPONENTIATION,
          IMPROVED_RECURSIVE_EXPONTENTIATION
     }
 
@@ -51,10 +51,10 @@ namespace Homework1
 
             switch (this.algorithmToUse)
             {
-                case ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTITATION:
+                case ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION:
                     calculatedValue = this.func1(x, n);
                     break;
-                case ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTITATION:
+                case ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION:
                     calculatedValue = this.func2(x, n);
                     break;
                 case ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION:

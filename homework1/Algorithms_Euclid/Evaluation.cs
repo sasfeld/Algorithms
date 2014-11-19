@@ -134,7 +134,7 @@ namespace Homework1
                 foreach (long histoKey in histogram.Keys)
                 {
                     // calculate prohability (count divided by number of experiments)
-                    normalizedHistogram[histoKey] = (histogram[histoKey] / numberOfExperiments) * numberOfExperiments;
+                    normalizedHistogram[histoKey] = (histogram[histoKey] / numberOfExperiments) * 100;
                 }
 
                 return normalizedHistogram;
@@ -155,8 +155,8 @@ namespace Homework1
         protected void initialize()
         {
             this.algorithms = new HashSet<ExponentialAlgorithm>();
-            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTITATION);
-            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTITATION);
+            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION);
+            this.algorithms.Add(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
             this.algorithms.Add(ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
         }
 

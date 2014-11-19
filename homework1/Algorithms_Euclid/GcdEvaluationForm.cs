@@ -220,6 +220,9 @@ namespace Homework1
             {
                 evaluationChart.Series.Clear();
 
+                evaluationChart.Titles.Clear();
+                evaluationChart.Titles.Add("Algorithm " + method);
+
                 this.addTicksHistogram(evaluationChart, method);
             }
         }
@@ -227,11 +230,17 @@ namespace Homework1
         {
             for (int i = 1; i <= 3; i++)
             {
-                String seriesName = "N" + i;
+                String seriesName = "N" + i + " = " + this.getNValue(i);
 
                 // prepare legend and type of chart
                 chart.Series.Add(seriesName);
+                chart.ChartAreas[0].AxisX.Minimum = convertToInt(this.txtMinValue.Text);
+                chart.ChartAreas[0].AxisX.Maximum = convertToInt(this.txtMaxValue.Text);
+                chart.ChartAreas[0].AxisX.Title = "CPU Time (ticks)";
+                chart.ChartAreas[0].AxisY.Title = "Prohability (%)";
+                
                 chart.Series[seriesName].ChartType = SeriesChartType.Column;
+                
 
                 Evaluation.MethodEvaluationData methodData = evaluationData[method];
 
@@ -242,19 +251,24 @@ namespace Homework1
                     double ticksCount = ticksHistogram[ticks];
 
                     long enterTicks = ticks;
-                    if (ticks == 0)
-                    {
-                        enterTicks = 50;
-                    }
-                    else if (ticks == 1)
-                    {
-                        enterTicks = 100;
-                    }
                     chart.Series[seriesName].Points.AddXY(enterTicks, ticksCount);
                 }
             }
         }
 
+        protected String getNValue(int i)
+        {
+            switch(i) {
+                case 1:
+                    return this.textN1.Text;
+                case 2:
+                    return this.textN2.Text;
+                case 3: 
+                    return this.textN3.Text;
+                default:
+                    throw new Exception("Unknown n value " + i);
+            }
+        }
       
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -308,6 +322,11 @@ namespace Homework1
                 this.addInfo("Calculate exponential using " + method);
                 this.addInfo("Result of " + x + "^" + n + " = " + exponentialResult);
             }
+        }
+
+        private void EvaluationForm_Load(object sender, EventArgs e)
+        {
+
         }       
     }
 }
