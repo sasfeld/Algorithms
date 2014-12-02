@@ -117,6 +117,30 @@ namespace Homework1
             evaluation.runEvaluation(convertToInt(textLoops.Text));
 
             this.evaluationData = evaluation.getEvaluationData();
+
+            foreach (ExponentialAlgorithm algo in evaluation.getMethodsForEvaluation())
+            {
+                this.showMeansAndVariances(algo);
+            }
+        }
+
+        /// <summary>
+        /// Show the means and variances of each algorithm per problem size N.
+        /// </summary>
+        protected void showMeansAndVariances(ExponentialAlgorithm algorithm)
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                int numberOfLoops = convertToInt(this.textLoops.Text);
+
+                double meanInputSize = this.evaluationData[algorithm].calculateMean(i, numberOfLoops);
+                double varianceInputSize = this.evaluationData[algorithm].calculateVariance(i, numberOfLoops);
+
+                // print in textfield
+                this.addInfo("Mean for " + algorithm + " and N" + i + ": " + meanInputSize);
+                this.addInfo("Variance for " + algorithm + " and N" + i + ": " + varianceInputSize);
+            }
+
         }
 
         protected void addInputPairs(Evaluation evaluation)
@@ -322,11 +346,6 @@ namespace Homework1
                 this.addInfo("Calculate exponential using " + method);
                 this.addInfo("Result of " + x + "^" + n + " = " + exponentialResult);
             }
-        }
-
-        private void EvaluationForm_Load(object sender, EventArgs e)
-        {
-
-        }       
+        }     
     }
 }

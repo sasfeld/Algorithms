@@ -39,14 +39,14 @@ namespace Homework1_Test
 
         protected double runFunc1(long x, long n)
         {
-            exponential.setAlgorithmToUse(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTITATION);
+            exponential.setAlgorithmToUse(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION);
 
             return exponential.runAlgorithm(x, n);
         }
 
         protected double runFunc2(long x, long n)
         {
-            exponential.setAlgorithmToUse(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTITATION);
+            exponential.setAlgorithmToUse(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
 
             return exponential.runAlgorithm(x, n);
         }

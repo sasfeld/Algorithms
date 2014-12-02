@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms_Euclid
+namespace Homework1
 {
     /// <summary>
     /// A simple Math facade.
@@ -83,15 +83,15 @@ namespace Algorithms_Euclid
         /// <returns></returns>
         public static double calculateMean(long[] numbers)
         {
-            int count = numbers.Length;
+            double count = numbers.Length;
 
-            long sum = 0;
+            double sum = 0;
             foreach (long number in numbers)
             {
                 sum += number;
             }
 
-            return (sum / count);
+            return sum / count;
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Algorithms_Euclid
         /// <returns></returns>
         public static double calculateStandardDeviation(long[] numbers)
         {
-            int count = numbers.Length;
+            double count = numbers.Length;
             double mean = calculateMean(numbers);
 
             double varianceSum = 0;

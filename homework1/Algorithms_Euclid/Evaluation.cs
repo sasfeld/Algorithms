@@ -127,7 +127,7 @@ namespace Homework1
             /// </summary>
             /// <param name="histogram"></param>
             /// <param name="numberOfExperiments"></param>
-            protected SortedDictionary<long, double> normalizeHistogram(SortedDictionary<long, double> histogram, int numberOfExperiments)
+            protected SortedDictionary<long, double> normalizeHistogram(SortedDictionary<long, double> histogram, double numberOfExperiments)
             {
                 SortedDictionary<long, double> normalizedHistogram = new SortedDictionary<long, double>();
                 
@@ -138,6 +138,50 @@ namespace Homework1
                 }
 
                 return normalizedHistogram;
+            }
+
+            /// <summary>
+            /// Calculate the mean on this algorithm and the given problem size.
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            public double calculateMean(int experimentNumber, int numberOfLoops)
+            {
+                List<long> cpuTimes = new List<long>();
+
+                int maxIndex = numberOfLoops * (experimentNumber + 1);
+                for (int evaluationNumber = numberOfLoops * experimentNumber + 1; evaluationNumber <= maxIndex; evaluationNumber++)
+                {
+                    long ticks = this.getTicks()[evaluationNumber];
+
+                    cpuTimes.Add(ticks);
+                }
+
+                double cpuMean = ExtendedMath.calculateMean(cpuTimes.ToArray());
+
+                return cpuMean;
+            }
+
+            /// <summary>
+            /// Calculate the variance on this algorithm and the given problem size.
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            public double calculateVariance(int experimentNumber, int numberOfLoops)
+            {
+                List<long> cpuTimes = new List<long>();
+
+                int maxIndex = numberOfLoops * (experimentNumber + 1);
+                for (int evaluationNumber = numberOfLoops * experimentNumber + 1; evaluationNumber <= maxIndex; evaluationNumber++)
+                {
+                    long ticks = this.getTicks()[evaluationNumber];
+
+                    cpuTimes.Add(ticks);
+                }
+
+                double cpuMean = ExtendedMath.calculateStandardDeviation(cpuTimes.ToArray());
+
+                return cpuMean;
             }
 
         }

@@ -1005,7 +1005,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "EvaluationForm";
             this.Text = "Exponential EvaluationForm (c) Sascha Feldmann";
-            this.Load += new System.EventHandler(this.EvaluationForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evaluationChart)).EndInit();
