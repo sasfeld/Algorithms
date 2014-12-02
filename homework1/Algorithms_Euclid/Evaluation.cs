@@ -179,6 +179,10 @@ namespace Homework1
                     cpuTimes.Add(ticks);
                 }
 
+                if (experimentNumber == 2)
+                {
+                    int bla = 0;
+                }
                 double cpuMean = ExtendedMath.calculateStandardDeviation(cpuTimes.ToArray());
 
                 return cpuMean;
