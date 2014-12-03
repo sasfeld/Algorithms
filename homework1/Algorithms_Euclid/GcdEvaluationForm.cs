@@ -26,6 +26,9 @@ namespace Homework1
 
         protected Dictionary<ExponentialAlgorithm, Evaluation.MethodEvaluationData> evaluationData;
         protected Exponential exponential;
+        protected Dictionary<ExponentialAlgorithm, double[]> savedMeans;
+        protected Dictionary<ExponentialAlgorithm, double[]> savedVariances;
+
 
         public EvaluationForm()
         {
@@ -118,18 +121,25 @@ namespace Homework1
 
             this.evaluationData = evaluation.getEvaluationData();
 
+            this.savedMeans = new Dictionary<ExponentialAlgorithm, double[]>();
+            this.savedVariances = new Dictionary<ExponentialAlgorithm, double[]>();
+             
             foreach (ExponentialAlgorithm algo in evaluation.getMethodsForEvaluation())
             {
-                this.showMeansAndVariances(algo);
+                this.showAndSaveMeansAndVariances(algo);
             }
         }
 
         /// <summary>
         /// Show the means and variances of each algorithm per problem size N.
         /// </summary>
-        protected void showMeansAndVariances(ExponentialAlgorithm algorithm)
+        protected void showAndSaveMeansAndVariances(ExponentialAlgorithm algorithm)
         {
-            for (int i = 1; i <= 3; i++)
+            int numberExperiments = 3;
+            double[] means = new double[numberExperiments];
+            double[] variances = new double[numberExperiments];
+
+            for (int i = 1; i <= numberExperiments; i++)
             {
                 int numberOfLoops = convertToInt(this.textLoops.Text);
 
@@ -139,8 +149,16 @@ namespace Homework1
                 // print in textfield
                 this.addInfo("Mean for " + algorithm + " and N" + i + ": " + meanInputSize);
                 this.addInfo("Variance for " + algorithm + " and N" + i + ": " + varianceInputSize);
+
+                means[i-1] = meanInputSize;
+                variances[i-1] = varianceInputSize;
             }
 
+            this.savedMeans.Add(algorithm, means);
+            this.savedVariances.Add(algorithm, variances);
+
+            this.addInfo("Overall mean: " + ExtendedMath.calculateMean(means));
+            this.addInfo("Overall variance: " + ExtendedMath.calculateStandardDeviation(means));
         }
 
         protected void addInputPairs(Evaluation evaluation)
@@ -346,6 +364,141 @@ namespace Homework1
                 this.addInfo("Calculate exponential using " + method);
                 this.addInfo("Result of " + x + "^" + n + " = " + exponentialResult);
             }
-        }     
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
+                        
+            this.executeTTest(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
+        }   
+  
+        protected void executeTTest(ExponentialAlgorithm algorithm1, ExponentialAlgorithm algorithm2)
+        {
+            TTestResult result = evaluationChart.DataManipulator.Statistics.TTestPaired(0, 0.05, algorithm1.ToString(), algorithm2.ToString());
+
+            this.addInfo("");
+            this.addInfo("TTest result for " + algorithm1 + " and " + algorithm2 + ":");
+            this.addInfo("TValue: " + result.TValue);
+            this.addInfo("P(T<=t) one: " + result.ProbabilityTOneTail);
+            this.addInfo("t critical one tail: " + result.TCriticalValueOneTail);
+            this.addInfo("P(T<=t) two: " + result.ProbabilityTTwoTail);
+            this.addInfo("t critical two tail: " + result.TCriticalValueTwoTail);
+            this.addInfo("");
+        }
+
+        protected void executeFTest(ExponentialAlgorithm algorithm1, ExponentialAlgorithm algorithm2)
+        {
+            FTestResult result = evaluationChart.DataManipulator.Statistics.FTest(0.05, algorithm1.ToString(), algorithm2.ToString());
+
+            this.addInfo("");
+            this.addInfo("FTest result for " + algorithm1 + " and " + algorithm2 + ":");
+            this.addInfo("FValue: " + result.FValue);
+            this.addInfo("P(F<=f) one: " + result.ProbabilityFOneTail);
+            this.addInfo("F critical one tail: " + result.ProbabilityFOneTail);
+            this.addInfo("Mean 1: " + result.FirstSeriesMean);
+            this.addInfo("Mean 2: " + result.SecondSeriesMean);
+            this.addInfo("");
+
+        }
+
+        private void drawTTestDiagram(ExponentialAlgorithm algorithm1, ExponentialAlgorithm algorithm2)
+        {
+            // set diagram title
+            evaluationChart.Series.Clear();
+            evaluationChart.Titles.Clear();
+            evaluationChart.Titles.Add("TTest " + algorithm1 + " and " + algorithm2);
+
+            // draw diagram
+            this.addTTestDiagram(evaluationChart, algorithm1);
+            this.addTTestDiagram(evaluationChart, algorithm2);
+        }
+
+        protected void addTTestDiagram(Chart chart, ExponentialAlgorithm method)
+        {
+            String seriesName = method.ToString();
+
+            // prepare legend and type of chart
+            chart.Series.Add(seriesName);
+            chart.ChartAreas[0].AxisX.Minimum = convertToInt(this.txtMinValue.Text);
+            chart.ChartAreas[0].AxisX.Maximum = convertToInt(this.txtMaxValue.Text);
+            chart.ChartAreas[0].AxisX.Title = "Problem Size";
+            chart.ChartAreas[0].AxisY.Title = "Mean (CPU ticks)";
+
+            chart.Series[seriesName].ChartType = SeriesChartType.Column;
+
+            for (int i = 0; i < 3; i++)
+            {
+                // add x: problem size: y: mean for the problem size in current algorithm's series
+                chart.Series[seriesName].Points.AddXY(i, this.savedMeans[method][i]);
+            }
+        }
+
+        private void btnTTestAlg1_Alg3_Click(object sender, EventArgs e)
+        {
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+
+            this.executeTTest(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+        }
+
+        private void btnTTest_Alg2_Alg3_Click(object sender, EventArgs e)
+        {
+
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+
+            this.executeTTest(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+        }
+
+        private void btnFTestAlg1_2_Click(object sender, EventArgs e)
+        {
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
+
+            this.executeFTest(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION);
+        
+        }
+
+        private void btnFTest_Alg1_3_Click(object sender, EventArgs e)
+        {
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+
+            this.executeFTest(ExponentialAlgorithm.SIMPLE_ITERATIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+        }
+
+        private void btnFTest_Alg2_3_Click(object sender, EventArgs e)
+        {
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            this.drawTTestDiagram(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+
+            this.executeFTest(ExponentialAlgorithm.SIMPLE_RECURSIVE_EXPONENTIATION, ExponentialAlgorithm.IMPROVED_RECURSIVE_EXPONTENTIATION);
+        }
     }
 }

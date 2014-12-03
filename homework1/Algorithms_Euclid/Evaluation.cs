@@ -9,7 +9,7 @@ namespace Homework1
     public class Evaluation
     {
         /// <summary>
-        /// Container object which keeps the evaluation data for a single evaluated GCD algorithm.
+        /// Container object which keeps the evaluation data for a single evaluated algorithm.
         /// </summary>
         public class MethodEvaluationData {
             protected SortedDictionary<int, long> ticks;
@@ -92,6 +92,7 @@ namespace Homework1
             /// Get a normalized histogram of the CPU ticks.
             /// 
             /// Therefore, return an array with key = ticks and value = count of the tick values
+            /// Hand in an experiment number (i.e. for specified problem size) to get a histogram for the single experiment.
             /// </summary>
             /// <returns></returns>
             public SortedDictionary<long, double> getTicksHistogram(int experimentNumber, int numberOfLoops, bool normalize)
@@ -117,6 +118,38 @@ namespace Homework1
                 if (normalize)
                 {
                     ticksHistogram = this.normalizeHistogram(ticksHistogram, numberOfLoops);
+                }
+
+                return ticksHistogram;
+            }
+
+            // Get a normalized histogram of the CPU ticks covering all problem sizes.
+            /// 
+            /// Therefore, return an array with key = ticks and value = count of the tick values
+            /// </summary>
+            /// <returns></returns>
+            public SortedDictionary<long, double> getTicksHistogram(bool normalize)
+            {
+                SortedDictionary<long, double> ticksHistogram = new SortedDictionary<long, double>();
+
+                foreach (int experimentNumber in this.getTicks().Keys)
+                {
+                    long ticks = this.getTicks()[experimentNumber];
+                    // increase count if entry for number of steps exists
+                    if (ticksHistogram.ContainsKey(ticks))
+                    {
+                        ticksHistogram[ticks]++;
+                    }
+                    else
+                    {
+                        // otherwise set count to 1
+                        ticksHistogram[ticks] = 1;
+                    }
+                }
+
+                if (normalize)
+                {
+                    ticksHistogram = this.normalizeHistogram(ticksHistogram, this.getTicks().Count);
                 }
 
                 return ticksHistogram;

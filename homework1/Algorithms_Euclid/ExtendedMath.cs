@@ -95,6 +95,24 @@ namespace Homework1
         }
 
         /// <summary>
+        /// Calculate the (arithmetic) mean of the given numbers.
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public static double calculateMean(double[] numbers)
+        {
+            double count = numbers.Length;
+
+            double sum = 0;
+            foreach (long number in numbers)
+            {
+                sum += number;
+            }
+
+            return sum / count;
+        }
+
+        /// <summary>
         /// Calculate the standard deviation of the given numbers.
         /// </summary>
         /// <param name="numbers"></param>
@@ -105,7 +123,26 @@ namespace Homework1
             double mean = calculateMean(numbers);
 
             double varianceSum = 0;
-            foreach (int number in numbers)
+            foreach (double number in numbers)
+            {
+                varianceSum += Math.Pow((number - mean), 2);
+            }
+
+            return Math.Sqrt(varianceSum / count);
+        }
+
+        /// <summary>
+        /// Calculate the standard deviation of the given numbers.
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public static double calculateStandardDeviation(double[] numbers)
+        {
+            double count = numbers.Length;
+            double mean = calculateMean(numbers);
+
+            double varianceSum = 0;
+            foreach (double number in numbers)
             {
                 varianceSum += Math.Pow((number - mean), 2);
             }
