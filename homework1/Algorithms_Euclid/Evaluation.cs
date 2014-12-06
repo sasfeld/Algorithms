@@ -15,6 +15,7 @@ namespace Homework1
             protected SortedDictionary<int, long> ticks;
             protected SortedDictionary<int, int> numbersOfSteps;
             protected int numberOfLoops;
+            protected Boolean getRidOufOutsiders;
 
             public MethodEvaluationData(int numberOfEvaluations)
             {
@@ -23,8 +24,18 @@ namespace Homework1
                 this.numberOfLoops = numberOfEvaluations;
             }
 
+            public void setGetRidofOutsiders(Boolean rid)
+            {
+                this.getRidOufOutsiders = rid;
+            }
+
             public void setTicks(int numberOfEvaluation, long tick)
             {
+                if (tick > 100)
+                {
+                    tick = 0;
+                }
+
                 this.ticks[numberOfEvaluation] = tick;
             }
 

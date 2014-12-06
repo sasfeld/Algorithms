@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -110,20 +110,20 @@
             this.textAnalysis = new System.Windows.Forms.RichTextBox();
             this.evaluationChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboDiagramMethods = new System.Windows.Forms.ComboBox();
-            this.btnComputingTimesTicks = new System.Windows.Forms.Button();
+            this.btnGrowth = new System.Windows.Forms.Button();
             this.btnHistogramTicks = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnFTest_Alg2_3 = new System.Windows.Forms.Button();
+            this.btnFTest_Alg1_3 = new System.Windows.Forms.Button();
+            this.btnFTestAlg1_2 = new System.Windows.Forms.Button();
+            this.btnTTest_Alg2_Alg3 = new System.Windows.Forms.Button();
+            this.btnTTestAlg1_Alg3 = new System.Windows.Forms.Button();
+            this.btnTTestAlg1_2 = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.txtMaxValue = new System.Windows.Forms.TextBox();
             this.txtMinValue = new System.Windows.Forms.TextBox();
-            this.btnTTestAlg1_2 = new System.Windows.Forms.Button();
-            this.btnTTestAlg1_Alg3 = new System.Windows.Forms.Button();
-            this.btnTTest_Alg2_Alg3 = new System.Windows.Forms.Button();
-            this.btnFTest_Alg2_3 = new System.Windows.Forms.Button();
-            this.btnFTest_Alg1_3 = new System.Windows.Forms.Button();
-            this.btnFTestAlg1_2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -896,16 +896,16 @@
             // 
             // evaluationChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.evaluationChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.evaluationChart.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.evaluationChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.evaluationChart.Legends.Add(legend1);
             this.evaluationChart.Location = new System.Drawing.Point(12, 326);
             this.evaluationChart.Name = "evaluationChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.evaluationChart.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.evaluationChart.Series.Add(series1);
             this.evaluationChart.Size = new System.Drawing.Size(1001, 548);
             this.evaluationChart.TabIndex = 10;
             this.evaluationChart.Text = "chartNumberOfSteps";
@@ -918,15 +918,15 @@
             this.comboDiagramMethods.Size = new System.Drawing.Size(121, 21);
             this.comboDiagramMethods.TabIndex = 15;
             // 
-            // btnComputingTimesTicks
+            // btnGrowth
             // 
-            this.btnComputingTimesTicks.Location = new System.Drawing.Point(20, 14);
-            this.btnComputingTimesTicks.Name = "btnComputingTimesTicks";
-            this.btnComputingTimesTicks.Size = new System.Drawing.Size(129, 23);
-            this.btnComputingTimesTicks.TabIndex = 16;
-            this.btnComputingTimesTicks.Text = "Times Histogram (milliseconds)";
-            this.btnComputingTimesTicks.UseVisualStyleBackColor = true;
-            this.btnComputingTimesTicks.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnGrowth.Location = new System.Drawing.Point(20, 14);
+            this.btnGrowth.Name = "btnGrowth";
+            this.btnGrowth.Size = new System.Drawing.Size(129, 23);
+            this.btnGrowth.TabIndex = 16;
+            this.btnGrowth.Text = "Growth";
+            this.btnGrowth.UseVisualStyleBackColor = true;
+            this.btnGrowth.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnHistogramTicks
             // 
@@ -962,11 +962,71 @@
             this.panel5.Controls.Add(this.txtMaxValue);
             this.panel5.Controls.Add(this.txtMinValue);
             this.panel5.Controls.Add(this.btnHistogramTicks);
-            this.panel5.Controls.Add(this.btnComputingTimesTicks);
+            this.panel5.Controls.Add(this.btnGrowth);
             this.panel5.Location = new System.Drawing.Point(12, 242);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(838, 98);
             this.panel5.TabIndex = 18;
+            // 
+            // btnFTest_Alg2_3
+            // 
+            this.btnFTest_Alg2_3.Location = new System.Drawing.Point(510, 64);
+            this.btnFTest_Alg2_3.Name = "btnFTest_Alg2_3";
+            this.btnFTest_Alg2_3.Size = new System.Drawing.Size(129, 23);
+            this.btnFTest_Alg2_3.TabIndex = 28;
+            this.btnFTest_Alg2_3.Text = "FTest Alg2-Alg3";
+            this.btnFTest_Alg2_3.UseVisualStyleBackColor = true;
+            this.btnFTest_Alg2_3.Click += new System.EventHandler(this.btnFTest_Alg2_3_Click);
+            // 
+            // btnFTest_Alg1_3
+            // 
+            this.btnFTest_Alg1_3.Location = new System.Drawing.Point(510, 35);
+            this.btnFTest_Alg1_3.Name = "btnFTest_Alg1_3";
+            this.btnFTest_Alg1_3.Size = new System.Drawing.Size(129, 23);
+            this.btnFTest_Alg1_3.TabIndex = 27;
+            this.btnFTest_Alg1_3.Text = "FTest Alg1-Alg3";
+            this.btnFTest_Alg1_3.UseVisualStyleBackColor = true;
+            this.btnFTest_Alg1_3.Click += new System.EventHandler(this.btnFTest_Alg1_3_Click);
+            // 
+            // btnFTestAlg1_2
+            // 
+            this.btnFTestAlg1_2.Location = new System.Drawing.Point(510, 6);
+            this.btnFTestAlg1_2.Name = "btnFTestAlg1_2";
+            this.btnFTestAlg1_2.Size = new System.Drawing.Size(129, 23);
+            this.btnFTestAlg1_2.TabIndex = 26;
+            this.btnFTestAlg1_2.Text = "FTest Alg1-Alg2";
+            this.btnFTestAlg1_2.UseVisualStyleBackColor = true;
+            this.btnFTestAlg1_2.Click += new System.EventHandler(this.btnFTestAlg1_2_Click);
+            // 
+            // btnTTest_Alg2_Alg3
+            // 
+            this.btnTTest_Alg2_Alg3.Location = new System.Drawing.Point(350, 64);
+            this.btnTTest_Alg2_Alg3.Name = "btnTTest_Alg2_Alg3";
+            this.btnTTest_Alg2_Alg3.Size = new System.Drawing.Size(129, 23);
+            this.btnTTest_Alg2_Alg3.TabIndex = 25;
+            this.btnTTest_Alg2_Alg3.Text = "TTest Alg2-Alg3";
+            this.btnTTest_Alg2_Alg3.UseVisualStyleBackColor = true;
+            this.btnTTest_Alg2_Alg3.Click += new System.EventHandler(this.btnTTest_Alg2_Alg3_Click);
+            // 
+            // btnTTestAlg1_Alg3
+            // 
+            this.btnTTestAlg1_Alg3.Location = new System.Drawing.Point(350, 35);
+            this.btnTTestAlg1_Alg3.Name = "btnTTestAlg1_Alg3";
+            this.btnTTestAlg1_Alg3.Size = new System.Drawing.Size(129, 23);
+            this.btnTTestAlg1_Alg3.TabIndex = 24;
+            this.btnTTestAlg1_Alg3.Text = "TTest Alg1-Alg3";
+            this.btnTTestAlg1_Alg3.UseVisualStyleBackColor = true;
+            this.btnTTestAlg1_Alg3.Click += new System.EventHandler(this.btnTTestAlg1_Alg3_Click);
+            // 
+            // btnTTestAlg1_2
+            // 
+            this.btnTTestAlg1_2.Location = new System.Drawing.Point(350, 6);
+            this.btnTTestAlg1_2.Name = "btnTTestAlg1_2";
+            this.btnTTestAlg1_2.Size = new System.Drawing.Size(129, 23);
+            this.btnTTestAlg1_2.TabIndex = 23;
+            this.btnTTestAlg1_2.Text = "TTest Alg1-Alg2";
+            this.btnTTestAlg1_2.UseVisualStyleBackColor = true;
+            this.btnTTestAlg1_2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // label31
             // 
@@ -1003,66 +1063,6 @@
             this.txtMinValue.Size = new System.Drawing.Size(24, 20);
             this.txtMinValue.TabIndex = 20;
             this.txtMinValue.Text = "-5";
-            // 
-            // btnTTestAlg1_2
-            // 
-            this.btnTTestAlg1_2.Location = new System.Drawing.Point(350, 6);
-            this.btnTTestAlg1_2.Name = "btnTTestAlg1_2";
-            this.btnTTestAlg1_2.Size = new System.Drawing.Size(129, 23);
-            this.btnTTestAlg1_2.TabIndex = 23;
-            this.btnTTestAlg1_2.Text = "TTest Alg1-Alg2";
-            this.btnTTestAlg1_2.UseVisualStyleBackColor = true;
-            this.btnTTestAlg1_2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // btnTTestAlg1_Alg3
-            // 
-            this.btnTTestAlg1_Alg3.Location = new System.Drawing.Point(350, 35);
-            this.btnTTestAlg1_Alg3.Name = "btnTTestAlg1_Alg3";
-            this.btnTTestAlg1_Alg3.Size = new System.Drawing.Size(129, 23);
-            this.btnTTestAlg1_Alg3.TabIndex = 24;
-            this.btnTTestAlg1_Alg3.Text = "TTest Alg1-Alg3";
-            this.btnTTestAlg1_Alg3.UseVisualStyleBackColor = true;
-            this.btnTTestAlg1_Alg3.Click += new System.EventHandler(this.btnTTestAlg1_Alg3_Click);
-            // 
-            // btnTTest_Alg2_Alg3
-            // 
-            this.btnTTest_Alg2_Alg3.Location = new System.Drawing.Point(350, 64);
-            this.btnTTest_Alg2_Alg3.Name = "btnTTest_Alg2_Alg3";
-            this.btnTTest_Alg2_Alg3.Size = new System.Drawing.Size(129, 23);
-            this.btnTTest_Alg2_Alg3.TabIndex = 25;
-            this.btnTTest_Alg2_Alg3.Text = "TTest Alg2-Alg3";
-            this.btnTTest_Alg2_Alg3.UseVisualStyleBackColor = true;
-            this.btnTTest_Alg2_Alg3.Click += new System.EventHandler(this.btnTTest_Alg2_Alg3_Click);
-            // 
-            // btnFTest_Alg2_3
-            // 
-            this.btnFTest_Alg2_3.Location = new System.Drawing.Point(510, 64);
-            this.btnFTest_Alg2_3.Name = "btnFTest_Alg2_3";
-            this.btnFTest_Alg2_3.Size = new System.Drawing.Size(129, 23);
-            this.btnFTest_Alg2_3.TabIndex = 28;
-            this.btnFTest_Alg2_3.Text = "FTest Alg2-Alg3";
-            this.btnFTest_Alg2_3.UseVisualStyleBackColor = true;
-            this.btnFTest_Alg2_3.Click += new System.EventHandler(this.btnFTest_Alg2_3_Click);
-            // 
-            // btnFTest_Alg1_3
-            // 
-            this.btnFTest_Alg1_3.Location = new System.Drawing.Point(510, 35);
-            this.btnFTest_Alg1_3.Name = "btnFTest_Alg1_3";
-            this.btnFTest_Alg1_3.Size = new System.Drawing.Size(129, 23);
-            this.btnFTest_Alg1_3.TabIndex = 27;
-            this.btnFTest_Alg1_3.Text = "FTest Alg1-Alg3";
-            this.btnFTest_Alg1_3.UseVisualStyleBackColor = true;
-            this.btnFTest_Alg1_3.Click += new System.EventHandler(this.btnFTest_Alg1_3_Click);
-            // 
-            // btnFTestAlg1_2
-            // 
-            this.btnFTestAlg1_2.Location = new System.Drawing.Point(510, 6);
-            this.btnFTestAlg1_2.Name = "btnFTestAlg1_2";
-            this.btnFTestAlg1_2.Size = new System.Drawing.Size(129, 23);
-            this.btnFTestAlg1_2.TabIndex = 26;
-            this.btnFTestAlg1_2.Text = "FTest Alg1-Alg2";
-            this.btnFTestAlg1_2.UseVisualStyleBackColor = true;
-            this.btnFTestAlg1_2.Click += new System.EventHandler(this.btnFTestAlg1_2_Click);
             // 
             // EvaluationForm
             // 
@@ -1106,7 +1106,7 @@
         private System.Windows.Forms.RichTextBox textAnalysis;
         private System.Windows.Forms.DataVisualization.Charting.Chart evaluationChart;
         private System.Windows.Forms.ComboBox comboDiagramMethods;
-        private System.Windows.Forms.Button btnComputingTimesTicks;
+        private System.Windows.Forms.Button btnGrowth;
         private System.Windows.Forms.Button btnHistogramTicks;
         private System.Windows.Forms.TextBox textX3;
         private System.Windows.Forms.TextBox textX2;

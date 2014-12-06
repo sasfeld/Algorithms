@@ -27,7 +27,10 @@ namespace Homework1
         protected Dictionary<ExponentialAlgorithm, Evaluation.MethodEvaluationData> evaluationData;
         protected Exponential exponential;
         protected Dictionary<ExponentialAlgorithm, double[]> savedMeans;
+        protected Dictionary<ExponentialAlgorithm, double> overallMeans;
         protected Dictionary<ExponentialAlgorithm, double[]> savedVariances;
+        protected Boolean getRidOfOutsiders = true;
+
 
 
         public EvaluationForm()
@@ -122,6 +125,7 @@ namespace Homework1
             this.evaluationData = evaluation.getEvaluationData();
 
             this.savedMeans = new Dictionary<ExponentialAlgorithm, double[]>();
+            this.overallMeans = new Dictionary<ExponentialAlgorithm, double>();
             this.savedVariances = new Dictionary<ExponentialAlgorithm, double[]>();
              
             foreach (ExponentialAlgorithm algo in evaluation.getMethodsForEvaluation())
@@ -139,6 +143,7 @@ namespace Homework1
             double[] means = new double[numberExperiments];
             double[] variances = new double[numberExperiments];
 
+            this.evaluationData[algorithm].setGetRidofOutsiders(true);
             for (int i = 1; i <= numberExperiments; i++)
             {
                 int numberOfLoops = convertToInt(this.textLoops.Text);
@@ -157,7 +162,10 @@ namespace Homework1
             this.savedMeans.Add(algorithm, means);
             this.savedVariances.Add(algorithm, variances);
 
-            this.addInfo("Overall mean: " + ExtendedMath.calculateMean(means));
+            double overallMean = ExtendedMath.calculateMean(means);
+            this.overallMeans.Add(algorithm, overallMean);
+
+            this.addInfo("Overall mean: " + overallMean);
             this.addInfo("Overall variance: " + ExtendedMath.calculateStandardDeviation(means));
         }
 
@@ -315,7 +323,43 @@ namespace Homework1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-           
+            if (null == this.evaluationData)
+            {
+                this.addInfo("Please start the evaluation first.");
+                return;
+            }
+
+            evaluationChart.Series.Clear();
+
+            evaluationChart.Titles.Clear();
+            evaluationChart.Titles.Add("Algorithm Growth");
+
+            evaluationChart.ChartAreas[0].AxisX.Minimum = convertToInt(this.txtMinValue.Text);
+            evaluationChart.ChartAreas[0].AxisX.Maximum = convertToInt(this.txtMaxValue.Text);
+            evaluationChart.ChartAreas[0].AxisX.Title = "Problem Size (N)";
+            evaluationChart.ChartAreas[0].AxisY.Title = "CPU Time (ticks)";
+
+            foreach (ExponentialAlgorithm method in getSelectedAlgorithms())
+            {
+
+                this.addGrowthDiagram(evaluationChart, method);
+            }
+        }
+
+        protected void addGrowthDiagram(Chart chart, ExponentialAlgorithm method)
+        {
+            String seriesName = "" + method;
+
+            // prepare legend and type of chart
+            chart.Series.Add(seriesName);
+            chart.Series[seriesName].ChartType = SeriesChartType.Line;
+
+            for (int i = 1; i <= 3; i++)
+            {
+                int nValue = convertToInt(this.getNValue(i));
+
+                chart.Series[seriesName].Points.AddXY(nValue, this.savedMeans[method][i-1]);
+            }   
         }
 
         private void label4_Click_1(object sender, EventArgs e)
@@ -390,6 +434,8 @@ namespace Homework1
             this.addInfo("t critical one tail: " + result.TCriticalValueOneTail);
             this.addInfo("P(T<=t) two: " + result.ProbabilityTTwoTail);
             this.addInfo("t critical two tail: " + result.TCriticalValueTwoTail);
+            this.addInfo("Mean 1: " + result.FirstSeriesMean);
+            this.addInfo("Mean 2: " + result.SecondSeriesMean);
             this.addInfo("");
         }
 
@@ -401,7 +447,7 @@ namespace Homework1
             this.addInfo("FTest result for " + algorithm1 + " and " + algorithm2 + ":");
             this.addInfo("FValue: " + result.FValue);
             this.addInfo("P(F<=f) one: " + result.ProbabilityFOneTail);
-            this.addInfo("F critical one tail: " + result.ProbabilityFOneTail);
+            this.addInfo("F critical one tail: " + result.FCriticalValueOneTail);
             this.addInfo("Mean 1: " + result.FirstSeriesMean);
             this.addInfo("Mean 2: " + result.SecondSeriesMean);
             this.addInfo("");
@@ -433,10 +479,12 @@ namespace Homework1
 
             chart.Series[seriesName].ChartType = SeriesChartType.Column;
 
-            for (int i = 0; i < 3; i++)
+            foreach (int numberOfExperiment in this.evaluationData[method].getTicks().Keys)
             {
+                long measuredCpuTime = this.evaluationData[method].getTicks()[numberOfExperiment];
+
                 // add x: problem size: y: mean for the problem size in current algorithm's series
-                chart.Series[seriesName].Points.AddXY(i, this.savedMeans[method][i]);
+                chart.Series[seriesName].Points.AddXY(numberOfExperiment, measuredCpuTime);
             }
         }
 
