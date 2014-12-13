@@ -58,7 +58,7 @@
             this.btnLoadCorpus.Name = "btnLoadCorpus";
             this.btnLoadCorpus.Size = new System.Drawing.Size(134, 23);
             this.btnLoadCorpus.TabIndex = 0;
-            this.btnLoadCorpus.Text = "Load corpus";
+            this.btnLoadCorpus.Text = "Add document";
             this.btnLoadCorpus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadCorpus.UseVisualStyleBackColor = true;
             this.btnLoadCorpus.Click += new System.EventHandler(this.btnLoadCorpus_Click);
@@ -72,6 +72,7 @@
             this.btnTriggerPreprocesses.Text = "Trigger preprocessing";
             this.btnTriggerPreprocesses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTriggerPreprocesses.UseVisualStyleBackColor = true;
+            this.btnTriggerPreprocesses.Click += new System.EventHandler(this.btnTriggerPreprocesses_Click);
             // 
             // btnGenerateNGrams
             // 

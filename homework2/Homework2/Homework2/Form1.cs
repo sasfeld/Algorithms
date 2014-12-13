@@ -58,20 +58,45 @@ namespace Homework2
                 Document parsedDocument = this.txtParser.extractDocument(filePath);
                 DocumentCollection.getInstance().addDocumentByFileName(filePath, parsedDocument);
 
-                // show first and last sentence
-                String firstSentence = parsedDocument.getSentences()[0];
-                String lastSentence = parsedDocument.getSentences()[parsedDocument.getSentences().Count - 1];
-
                 this.addInfo("Parsed " + filePath);
-                this.addInfo("First sentence: " + firstSentence);
-                this.addInfo("Last sentence: " + lastSentence);
+                // show first and last sentence
+                this.printFirstAndLastSentence(parsedDocument);
                 this.addInfo("");
             }
+        }
+
+        protected void printFirstAndLastSentence(Document parsedDocument)
+        {
+             String firstSentence = parsedDocument.getSentences()[0];
+             String lastSentence = parsedDocument.getSentences()[parsedDocument.getSentences().Count - 1];
+
+             this.addInfo("First sentence: " + firstSentence);
+             this.addInfo("Last sentence: " + lastSentence);
         }
 
         protected void addInfo(String info)
         {
             this.txtInfo.AppendText(info + "\n");
+        }
+
+        private void btnTriggerPreprocesses_Click(object sender, EventArgs e)
+        {
+            // execute preprocesses chain
+            DocumentCollection.getInstance().applyPreprocesses();
+
+            // print results
+            this.addInfo("Applied preprocesses");
+
+            foreach (String processedDocument in DocumentCollection.getInstance().getAllDocuments().Keys)
+            {
+                this.addInfo("");
+                this.addInfo("Processed document: " + processedDocument);
+
+                Document doc = DocumentCollection.getInstance().getAllDocuments()[processedDocument];
+
+                this.printFirstAndLastSentence(doc);
+                this.addInfo("");
+            }
         }
     }
 }

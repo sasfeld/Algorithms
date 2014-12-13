@@ -15,6 +15,7 @@ namespace Homework2
     {
         protected Dictionary<String, Document> documents;
         protected static DocumentCollection instance;
+        protected Preprocess decoratedPreprocess;
 
         /// <summary>
         /// Get singleton instance.
@@ -38,6 +39,9 @@ namespace Homework2
         protected void initialize()
         {
             this.documents = new Dictionary<String, Document>();
+
+            // initialize preprocess chain
+            this.decoratedPreprocess = new LowerCasePreprocess(new RemoveStopWordsPreprocess());
         }
 
         /// <summary>
@@ -51,6 +55,15 @@ namespace Homework2
         }
 
         /// <summary>
+        /// Get all collected documents.
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<String, Document> getAllDocuments()
+        {
+            return this.documents;
+        }
+
+        /// <summary>
         /// Add an extracted document by its filename.
         /// </summary>
         /// <param name="fileName"></param>
@@ -58,6 +71,17 @@ namespace Homework2
         public void addDocumentByFileName(String fileName, Document document)
         {
             this.documents.Add(fileName, document);
+        }
+
+        /// <summary>
+        /// Apply the preprocesses on each document.
+        /// </summary>
+        public void applyPreprocesses()
+        {
+            foreach (Document doc in this.documents.Values)
+            {
+                this.decoratedPreprocess.execute(doc);
+            }
         }
     }
 }
