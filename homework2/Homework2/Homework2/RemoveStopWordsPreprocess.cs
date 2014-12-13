@@ -71,7 +71,7 @@ namespace Homework2
             // apply own filter
             List<String> preprocessedSentences = new List<String>();
 
-            foreach (String sentence in document.getSentences())
+            foreach (String sentence in document.getProcessedSentences())
             {
                 String processedSentence = this.removeStopWords(sentence);
                 processedSentence = this.removeDoubleWhitespaces(processedSentence);
@@ -79,7 +79,7 @@ namespace Homework2
                 preprocessedSentences.Add(processedSentence);                                
             }
 
-            document.setSentences(preprocessedSentences);
+            document.setProcessedSentences(preprocessedSentences);
         }
 
         protected String removeStopWords(String inputSentence)
@@ -96,6 +96,10 @@ namespace Homework2
 
                     // replace matched stopword optionally followed by whitespace by whitespace
                     replaced = Regex.Replace(replaced, regex, "", RegexOptions.IgnoreCase);
+
+                    // replace sentence characters
+                    String regexChars = @"[;,.!?'-]+";
+                    replaced = Regex.Replace(replaced, regexChars, "", RegexOptions.IgnoreCase);
                 }
             } else {
                  Console.WriteLine("RemoveStopWordsPreprocess::removeStopWords(): no english stop words were set. Will not remove any.");

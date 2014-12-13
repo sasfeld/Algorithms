@@ -28,12 +28,12 @@ namespace Homework2
             // apply own filter
             List<String> preprocessedSentences = new List<String>();
 
-            foreach (String sentence in document.getSentences())
+            foreach (String sentence in document.getProcessedSentences())
             {
                 preprocessedSentences.Add(this.makeWordsLowerCase(sentence));
             }
 
-            document.setSentences(preprocessedSentences);
+            document.setProcessedSentences(preprocessedSentences);
         }
 
         protected String makeWordsLowerCase(String inputSentence)

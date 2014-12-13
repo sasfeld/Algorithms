@@ -12,7 +12,7 @@ namespace HomeWork1Test
         {
             Document doc = new Document();
 
-            doc.addSentence("This is a dummy sentence");
+            doc.addSentence("This is a dummy sentence.");
 
             return doc;
         }

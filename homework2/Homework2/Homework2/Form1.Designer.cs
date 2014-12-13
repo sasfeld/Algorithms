@@ -117,7 +117,7 @@
             this.ClientSize = new System.Drawing.Size(680, 516);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "A&O - Homework2 - NGram Search";
+            this.Text = "A&O - Homework2 - NGram Search - (c) Sascha Feldmann ";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

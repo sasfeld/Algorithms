@@ -24,6 +24,8 @@ namespace Homework2
         protected Dictionary<NGrams, Dictionary<String, HashSet<int>>> index;
 
         protected List<String> sentences;
+        protected List<String> processedSentences;
+
 
         public Document()
         {
@@ -59,6 +61,7 @@ namespace Homework2
         public void setSentences(List<String> sentences)
         {
             this.sentences = sentences;
+            this.processedSentences = sentences;
         }
 
         /// <summary>
@@ -70,6 +73,22 @@ namespace Homework2
         public List<String> getSentences()
         {
             return this.sentences;
+        }
+
+        public void setProcessedSentences(List<String> sentences)
+        {
+            this.processedSentences = sentences;
+        }
+
+        /// <summary>
+        /// Get a list of processed sentences, where the position is the position of the sentence within the document.
+        /// 
+        /// Therefore, index positions are references on the index in the returned list.
+        /// </summary>
+        /// <returns></returns>
+        public List<String> getProcessedSentences()
+        {
+            return this.processedSentences;
         }
 
         /// <summary>

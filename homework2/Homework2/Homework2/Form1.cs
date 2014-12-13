@@ -74,6 +74,15 @@ namespace Homework2
              this.addInfo("Last sentence: " + lastSentence);
         }
 
+        protected void printFirstAndLastProcessedSentence(Document parsedDocument)
+        {
+            String firstSentence = parsedDocument.getProcessedSentences()[0];
+            String lastSentence = parsedDocument.getProcessedSentences()[parsedDocument.getSentences().Count - 1];
+
+            this.addInfo("First sentence: " + firstSentence);
+            this.addInfo("Last sentence: " + lastSentence);
+        }
+
         protected void addInfo(String info)
         {
             this.txtInfo.AppendText(info + "\n");
@@ -94,7 +103,7 @@ namespace Homework2
 
                 Document doc = DocumentCollection.getInstance().getAllDocuments()[processedDocument];
 
-                this.printFirstAndLastSentence(doc);
+                this.printFirstAndLastProcessedSentence(doc);
                 this.addInfo("");
             }
         }
