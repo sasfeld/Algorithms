@@ -73,7 +73,10 @@ namespace Homework2
 
             foreach (String sentence in document.getSentences())
             {
-                preprocessedSentences.Add(this.removeStopWords(sentence));
+                String processedSentence = this.removeStopWords(sentence);
+                processedSentence = this.removeDoubleWhitespaces(processedSentence);
+
+                preprocessedSentences.Add(processedSentence);                                
             }
 
             document.setSentences(preprocessedSentences);
@@ -87,13 +90,23 @@ namespace Homework2
             {
                 foreach (String stopWord in this.englishStopwords)
                 {
-                    String regex = @"" + stopWord + "\\w*";
+                    String regex = @"\b?\b";
+                    // use quoting instead of string concatenation - otherwise the pattern will be backslashed incorrectly for some reason
+                    regex = regex.Replace("?", stopWord);
+
                     // replace matched stopword optionally followed by whitespace by whitespace
-                    replaced = Regex.Replace(replaced, regex, "");
+                    replaced = Regex.Replace(replaced, regex, "", RegexOptions.IgnoreCase);
                 }
             } else {
                  Console.WriteLine("RemoveStopWordsPreprocess::removeStopWords(): no english stop words were set. Will not remove any.");
             }
+
+            return replaced;
+        }
+
+        protected String removeDoubleWhitespaces(String processed)
+        {
+            String replaced = Regex.Replace(processed, @"\s+", " ", RegexOptions.IgnoreCase);           
 
             return replaced;
         }

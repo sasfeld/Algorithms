@@ -38,7 +38,7 @@ namespace Homework2
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
 
-            fileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            fileDialog.InitialDirectory = Directory.GetCurrentDirectory() + "/../../data";
             fileDialog.Filter = "txt files (*.txt)|*.txt|All Files (*.*)|*.*";
             // set current filter to 'All files'
             fileDialog.FilterIndex = 2;

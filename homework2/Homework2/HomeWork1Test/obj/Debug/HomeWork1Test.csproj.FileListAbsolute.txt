@@ -1,0 +1,7 @@
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\bin\Debug\HomeWork1Test.dll
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\bin\Debug\HomeWork1Test.pdb
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\bin\Debug\Homework2.exe
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\bin\Debug\Homework2.pdb
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\obj\Debug\HomeWork1Test.csprojResolveAssemblyReference.cache
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\obj\Debug\HomeWork1Test.dll
+C:\g3\Algorithms\homework2\Homework2\HomeWork1Test\obj\Debug\HomeWork1Test.pdb
