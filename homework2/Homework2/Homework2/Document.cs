@@ -25,6 +25,7 @@ namespace Homework2
 
         protected List<String> sentences;
         protected List<String> processedSentences;
+        protected SentenceIndex sentenceIndex;
 
 
         public Document()
@@ -42,6 +43,8 @@ namespace Homework2
             this.index.Add(NGrams.UNIGRAM, new Dictionary<string, HashSet<int>>());
             this.index.Add(NGrams.BIGRAM, new Dictionary<string, HashSet<int>>());
             this.index.Add(NGrams.TRIGRAM, new Dictionary<string, HashSet<int>>());
+
+            this.sentenceIndex = new SentenceIndex();
         }
 
         /// <summary>
@@ -100,6 +103,11 @@ namespace Homework2
         public Dictionary<NGrams, Dictionary<String, HashSet<int>>> getIndex()
         {
             return this.index;
+        }
+
+        public SentenceIndex getSentenceIndex()
+        {
+            return this.sentenceIndex;
         }
     }
 }

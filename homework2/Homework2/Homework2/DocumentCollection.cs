@@ -16,6 +16,7 @@ namespace Homework2
         protected Dictionary<String, Document> documents;
         protected static DocumentCollection instance;
         protected Preprocess decoratedPreprocess;
+        protected IndexCreator indexCreator;
 
         /// <summary>
         /// Get singleton instance.
@@ -42,6 +43,8 @@ namespace Homework2
 
             // initialize preprocess chain
             this.decoratedPreprocess = new LowerCasePreprocess(new RemoveStopWordsPreprocess());
+
+            this.indexCreator = new IndexCreator();
         }
 
         /// <summary>
@@ -83,5 +86,18 @@ namespace Homework2
                 this.decoratedPreprocess.execute(doc);
             }
         }
+
+        public void createIndex(Document.NGrams ngramType)
+        {
+            // iterate over documents
+            foreach (Document doc in this.documents.Values)
+            {
+                SentenceIndex sentenceIndex = doc.getSentenceIndex();
+
+                this.indexCreator.createIndex(doc, ngramType);
+            }
+        }
+
+       
     }
 }
