@@ -155,17 +155,17 @@ namespace Homework2
             Dictionary<String, long[]> results = DocumentCollection.getInstance().searchTerms(inputTerms);
 
             this.addSearchTermOutput("Finished search for terms: " + inputTerms);
-            this.printSearchTermResults(results);
+            this.printSearchTermResults(inputTerms, results);
 
             // print empty line
             this.addSearchTermOutput("");
         }
 
-        protected void printSearchTermResults(Dictionary<String, long[]> results)
+        protected void printSearchTermResults(String inputTerms, Dictionary<String, long[]> results)
         {
             foreach (String docName in results.Keys)
             {
-                this.addSearchTermOutput("## Results (sentences indices) in document " + docName + " ##");
+                this.addSearchTermOutput("## Results (sentences indices [Levenshtein similarity]) in document " + docName + " ##");
 
                 String indicesString = "";
                 foreach (long index in results[docName])
@@ -175,7 +175,10 @@ namespace Homework2
                         indicesString += "\n";
                     }
 
-                    indicesString += index + ", ";
+                    String sentence = this.getSentence(docName, index);
+
+                    int levenshteinDistance = LevenshteinDistance.compute(inputTerms, sentence);
+                    indicesString += index + " ["+ levenshteinDistance +"], ";
                 }
 
                 if ("" == indicesString)
@@ -187,6 +190,13 @@ namespace Homework2
 
                 this.addSearchTermOutput("##########################\n");
             }
+        }
+
+        protected String getSentence(String documentName, long sentenceIndex)
+        {
+            List<String> sentences = DocumentCollection.getInstance().getDocumentByFileName(documentName).getSentences();
+            
+            return sentences[(int) sentenceIndex];
         }
     }
 }
