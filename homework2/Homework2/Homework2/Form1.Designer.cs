@@ -35,10 +35,10 @@
             this.btnTriggerPreprocesses = new System.Windows.Forms.Button();
             this.btnLoadCorpus = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtSearchTerm = new System.Windows.Forms.TextBox();
-            this.btnSearchTerm = new System.Windows.Forms.Button();
             this.txtSearchTermResults = new System.Windows.Forms.RichTextBox();
+            this.btnSearchTerm = new System.Windows.Forms.Button();
+            this.txtSearchTerm = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +77,7 @@
             // 
             // btnGenerateNGrams
             // 
-            this.btnGenerateNGrams.Location = new System.Drawing.Point(13, 142);
+            this.btnGenerateNGrams.Location = new System.Drawing.Point(38, 142);
             this.btnGenerateNGrams.Name = "btnGenerateNGrams";
             this.btnGenerateNGrams.Size = new System.Drawing.Size(134, 23);
             this.btnGenerateNGrams.TabIndex = 2;
@@ -88,7 +88,7 @@
             // 
             // btnTriggerPreprocesses
             // 
-            this.btnTriggerPreprocesses.Location = new System.Drawing.Point(13, 100);
+            this.btnTriggerPreprocesses.Location = new System.Drawing.Point(38, 100);
             this.btnTriggerPreprocesses.Name = "btnTriggerPreprocesses";
             this.btnTriggerPreprocesses.Size = new System.Drawing.Size(134, 23);
             this.btnTriggerPreprocesses.TabIndex = 1;
@@ -99,7 +99,7 @@
             // 
             // btnLoadCorpus
             // 
-            this.btnLoadCorpus.Location = new System.Drawing.Point(13, 60);
+            this.btnLoadCorpus.Location = new System.Drawing.Point(38, 60);
             this.btnLoadCorpus.Name = "btnLoadCorpus";
             this.btnLoadCorpus.Size = new System.Drawing.Size(134, 23);
             this.btnLoadCorpus.TabIndex = 0;
@@ -120,22 +120,13 @@
             this.panel2.Size = new System.Drawing.Size(655, 162);
             this.panel2.TabIndex = 1;
             // 
-            // label2
+            // txtSearchTermResults
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(262, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 25);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Search";
-            // 
-            // txtSearchTerm
-            // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(13, 55);
-            this.txtSearchTerm.Name = "txtSearchTerm";
-            this.txtSearchTerm.Size = new System.Drawing.Size(183, 20);
-            this.txtSearchTerm.TabIndex = 7;
+            this.txtSearchTermResults.Location = new System.Drawing.Point(249, 43);
+            this.txtSearchTermResults.Name = "txtSearchTermResults";
+            this.txtSearchTermResults.Size = new System.Drawing.Size(385, 105);
+            this.txtSearchTermResults.TabIndex = 6;
+            this.txtSearchTermResults.Text = "";
             // 
             // btnSearchTerm
             // 
@@ -147,13 +138,22 @@
             this.btnSearchTerm.UseVisualStyleBackColor = true;
             this.btnSearchTerm.Click += new System.EventHandler(this.btnSearchTerm_Click);
             // 
-            // txtSearchTermResults
+            // txtSearchTerm
             // 
-            this.txtSearchTermResults.Location = new System.Drawing.Point(249, 43);
-            this.txtSearchTermResults.Name = "txtSearchTermResults";
-            this.txtSearchTermResults.Size = new System.Drawing.Size(385, 105);
-            this.txtSearchTermResults.TabIndex = 6;
-            this.txtSearchTermResults.Text = "";
+            this.txtSearchTerm.Location = new System.Drawing.Point(13, 55);
+            this.txtSearchTerm.Name = "txtSearchTerm";
+            this.txtSearchTerm.Size = new System.Drawing.Size(183, 20);
+            this.txtSearchTerm.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(262, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 25);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Search";
             // 
             // Form1
             // 

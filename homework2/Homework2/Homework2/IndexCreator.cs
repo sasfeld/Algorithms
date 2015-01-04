@@ -71,12 +71,14 @@ namespace Homework2
             {
                 String nGrams = "";
 
-                for (int j = i; j < i + numberWords && j < splitted.Length; j++)
+                // append words that are within current word index + numberWords (-1)
+                for (int j = i; i - 1 + numberWords < splitted.Length 
+                    && j < i + numberWords && j < splitted.Length; j++)
                 {
                     nGrams += " " + splitted[j];
                 }
 
-                finishedNGrams.Add(nGrams);
+                finishedNGrams.Add(nGrams.Trim());
             }
 
             return finishedNGrams.ToArray();
