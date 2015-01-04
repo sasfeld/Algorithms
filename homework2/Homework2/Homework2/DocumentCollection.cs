@@ -98,6 +98,20 @@ namespace Homework2
             }
         }
 
-       
+        public Dictionary<String, long[]> searchTerms(String nGrams)
+        {
+            Dictionary<String, long[]> searchResults = new Dictionary<String, long[]>();
+            int docNumber = 0;
+
+            foreach (Document doc in this.documents.Values)
+            {
+                long[] indices = doc.searchTerms(nGrams);
+
+                searchResults.Add(doc.getName(), indices);
+                docNumber++;
+            }
+
+            return searchResults;
+        }
     }
 }

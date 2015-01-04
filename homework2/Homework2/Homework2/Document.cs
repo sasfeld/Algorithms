@@ -27,10 +27,14 @@ namespace Homework2
         protected List<String> processedSentences;
         protected SentenceIndex sentenceIndex;
 
+        protected String name;
 
-        public Document()
+
+        public Document(String documentName)
         {
             this.initialize();
+
+            this.name = documentName;
         }
 
         protected void initialize()
@@ -108,6 +112,53 @@ namespace Homework2
         public SentenceIndex getSentenceIndex()
         {
             return this.sentenceIndex;
+        }
+
+        public String getName()
+        {
+            return this.name;
+        }
+
+        public long[] searchTerms(String nGrams)
+        {
+            if (null == this.sentenceIndex)
+            {
+                throw new NullReferenceException("SentenceIndex is null in document " + this.name);
+            }
+
+            HashSet<long> matchingSentencesIndexes = new HashSet<long>();
+
+            HashSet<long> unigramIndices = this.sentenceIndex.getIndices(Document.NGrams.UNIGRAM, nGrams);
+
+            if (null != unigramIndices)
+            {
+                foreach (long index in unigramIndices)
+                {
+                    matchingSentencesIndexes.Add(index);
+                }
+            }
+
+            HashSet<long> bigramIndices = this.sentenceIndex.getIndices(Document.NGrams.BIGRAM, nGrams);
+
+            if (null != bigramIndices)
+            {
+                foreach (long index in bigramIndices)
+                {
+                    matchingSentencesIndexes.Add(index);
+                }
+            }
+
+            HashSet<long> trigramIndices = this.sentenceIndex.getIndices(Document.NGrams.TRIGRAM, nGrams);
+
+            if (null != trigramIndices)
+            {
+                foreach (long index in trigramIndices)
+                {
+                    matchingSentencesIndexes.Add(index);
+                }
+            }
+
+            return matchingSentencesIndexes.ToArray();
         }
     }
 }

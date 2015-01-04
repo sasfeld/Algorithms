@@ -26,7 +26,7 @@ namespace Homework2
                 String[] rawContent = this.parseFile(documentAddress);
                 List<String> sentences = this.fetchSentences(rawContent);
 
-                Document extractedDocument = this.generateDocument(sentences);
+                Document extractedDocument = this.generateDocument(sentences, documentAddress);
 
                 return extractedDocument;
             }
@@ -81,9 +81,9 @@ namespace Homework2
             throw new FormatException("Malformed line: " + extractedLine);
         }
 
-        protected Document generateDocument(List<String> sentences)
+        protected Document generateDocument(List<String> sentences, String documentAddress)
         {
-            Document doc = new Document();
+            Document doc = new Document(documentAddress);
             doc.setSentences(sentences);
 
             return doc;

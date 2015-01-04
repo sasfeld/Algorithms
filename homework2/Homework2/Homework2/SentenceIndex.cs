@@ -28,7 +28,7 @@ namespace Homework2
         /// </summary>
         /// <param name="nGramType"></param>
         /// <param name="nGram"></param>
-        /// <returns></returns>
+        /// <returns>null if no matches</returns>
         public HashSet<long> getIndices(Document.NGrams nGramType, String nGram)
         {
             // no entry for ngram type

@@ -34,7 +34,13 @@
             this.btnGenerateNGrams = new System.Windows.Forms.Button();
             this.btnTriggerPreprocesses = new System.Windows.Forms.Button();
             this.btnLoadCorpus = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSearchTerm = new System.Windows.Forms.TextBox();
+            this.btnSearchTerm = new System.Windows.Forms.Button();
+            this.txtSearchTermResults = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -102,16 +108,66 @@
             this.btnLoadCorpus.UseVisualStyleBackColor = true;
             this.btnLoadCorpus.Click += new System.EventHandler(this.btnLoadCorpus_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtSearchTermResults);
+            this.panel2.Controls.Add(this.btnSearchTerm);
+            this.panel2.Controls.Add(this.txtSearchTerm);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(13, 221);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(655, 162);
+            this.panel2.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(262, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 25);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Search";
+            // 
+            // txtSearchTerm
+            // 
+            this.txtSearchTerm.Location = new System.Drawing.Point(13, 55);
+            this.txtSearchTerm.Name = "txtSearchTerm";
+            this.txtSearchTerm.Size = new System.Drawing.Size(183, 20);
+            this.txtSearchTerm.TabIndex = 7;
+            // 
+            // btnSearchTerm
+            // 
+            this.btnSearchTerm.Location = new System.Drawing.Point(38, 102);
+            this.btnSearchTerm.Name = "btnSearchTerm";
+            this.btnSearchTerm.Size = new System.Drawing.Size(134, 23);
+            this.btnSearchTerm.TabIndex = 8;
+            this.btnSearchTerm.Text = "Search term";
+            this.btnSearchTerm.UseVisualStyleBackColor = true;
+            this.btnSearchTerm.Click += new System.EventHandler(this.btnSearchTerm_Click);
+            // 
+            // txtSearchTermResults
+            // 
+            this.txtSearchTermResults.Location = new System.Drawing.Point(249, 43);
+            this.txtSearchTermResults.Name = "txtSearchTermResults";
+            this.txtSearchTermResults.Size = new System.Drawing.Size(385, 105);
+            this.txtSearchTermResults.TabIndex = 6;
+            this.txtSearchTermResults.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 516);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "A&O - Homework2 - NGram Search - (c) Sascha Feldmann ";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -124,6 +180,11 @@
         private System.Windows.Forms.Button btnTriggerPreprocesses;
         private System.Windows.Forms.Button btnLoadCorpus;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnSearchTerm;
+        private System.Windows.Forms.TextBox txtSearchTerm;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox txtSearchTermResults;
     }
 }
 

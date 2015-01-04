@@ -88,6 +88,11 @@ namespace Homework2
             this.txtInfo.AppendText(info + "\n");
         }
 
+        protected void addSearchTermOutput(String output)
+        {
+            this.txtSearchTermResults.AppendText(output + "\n");
+        }
+
         private void btnTriggerPreprocesses_Click(object sender, EventArgs e)
         {
             // execute preprocesses chain
@@ -140,6 +145,48 @@ namespace Homework2
         protected void generateNGrams(Document.NGrams nGramType)
         {
             DocumentCollection.getInstance().createIndex(nGramType);
+        }
+
+        private void btnSearchTerm_Click(object sender, EventArgs e)
+        {
+            String inputTerms = this.txtSearchTerm.Text;
+
+            // trigger search
+            Dictionary<String, long[]> results = DocumentCollection.getInstance().searchTerms(inputTerms);
+
+            this.addSearchTermOutput("Finished search for terms: " + inputTerms);
+            this.printSearchTermResults(results);
+
+            // print empty line
+            this.addSearchTermOutput("");
+        }
+
+        protected void printSearchTermResults(Dictionary<String, long[]> results)
+        {
+            foreach (String docName in results.Keys)
+            {
+                this.addSearchTermOutput("## Results (sentences indices) in document " + docName + " ##");
+
+                String indicesString = "";
+                foreach (long index in results[docName])
+                {
+                    if (0 == indicesString.Length % 40)
+                    {
+                        indicesString += "\n";
+                    }
+
+                    indicesString += index + ", ";
+                }
+
+                if ("" == indicesString)
+                {
+                    indicesString = "no results";
+                }
+
+                this.addSearchTermOutput(indicesString);
+
+                this.addSearchTermOutput("##########################\n");
+            }
         }
     }
 }
