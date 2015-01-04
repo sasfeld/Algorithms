@@ -128,37 +128,47 @@ namespace Homework2
 
             HashSet<long> matchingSentencesIndexes = new HashSet<long>();
 
-            HashSet<long> unigramIndices = this.sentenceIndex.getIndices(Document.NGrams.UNIGRAM, nGrams);
-
-            if (null != unigramIndices)
-            {
-                foreach (long index in unigramIndices)
-                {
-                    matchingSentencesIndexes.Add(index);
-                }
-            }
-
-            HashSet<long> bigramIndices = this.sentenceIndex.getIndices(Document.NGrams.BIGRAM, nGrams);
-
-            if (null != bigramIndices)
-            {
-                foreach (long index in bigramIndices)
-                {
-                    matchingSentencesIndexes.Add(index);
-                }
-            }
-
-            HashSet<long> trigramIndices = this.sentenceIndex.getIndices(Document.NGrams.TRIGRAM, nGrams);
-
-            if (null != trigramIndices)
-            {
-                foreach (long index in trigramIndices)
-                {
-                    matchingSentencesIndexes.Add(index);
-                }
-            }
+            lookForUnigrams(nGrams, matchingSentencesIndexes);
+            lookForBigrams(nGrams, matchingSentencesIndexes);
+            lookForTrigrams(nGrams, matchingSentencesIndexes);
 
             return matchingSentencesIndexes.ToArray();
         }
+
+        private void lookForTrigrams(String nGrams, HashSet<long> matchingSentencesIndexes)
+        {
+            this.LookForNGram(nGrams, NGrams.TRIGRAM, matchingSentencesIndexes);
+        }
+
+        private void lookForBigrams(String nGrams, HashSet<long> matchingSentencesIndexes)
+        {
+            this.LookForNGram(nGrams, NGrams.BIGRAM, matchingSentencesIndexes);
+        }
+
+        private void lookForUnigrams(String nGrams, HashSet<long> matchingSentencesIndexes)
+        {
+            this.LookForNGram(nGrams, NGrams.UNIGRAM, matchingSentencesIndexes);
+        }
+
+        private void LookForNGram(String nGrams, Document.NGrams nGramType, HashSet<long> matchingSentencesIndexes) 
+        {
+            String[] ngrams = NGramUtil.splitNGramsByType(nGramType, nGrams);
+
+            HashSet<long> unigramIndices = new HashSet<long>();
+            foreach (String ngram in ngrams)
+            {
+                HashSet<long> indices = this.sentenceIndex.getIndices(nGramType, ngram);
+
+                if (null != indices)
+                {
+                    foreach (int index in indices)
+                    {
+                        matchingSentencesIndexes.Add(index);
+                    }
+                }
+            }
+        }
+
+
     }
 }

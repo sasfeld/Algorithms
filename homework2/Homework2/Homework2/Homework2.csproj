@@ -55,6 +55,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IndexCreator.cs" />
+    <Compile Include="LevenshteinDistance.cs" />
+    <Compile Include="NGramUtil.cs" />
     <Compile Include="RemoveStopWordsPreprocess.cs" />
     <Compile Include="LowerCasePreprocess.cs" />
     <Compile Include="Preprocess.cs" />
