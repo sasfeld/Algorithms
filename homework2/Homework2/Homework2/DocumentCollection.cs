@@ -98,6 +98,13 @@ namespace Homework2
             }
         }
 
+        /// <summary>
+        /// Search terms by delegating to all documents.
+        /// 
+        /// Use N-Gram search.
+        /// </summary>
+        /// <param name="nGrams">The input term sequence which will be split into n-grams.</param>
+        /// <returns>Dictionary of key = document name and sentence indices array.</returns>
         public Dictionary<String, long[]> searchTerms(String nGrams)
         {
             Dictionary<String, long[]> searchResults = new Dictionary<String, long[]>();
@@ -109,6 +116,41 @@ namespace Homework2
 
                 searchResults.Add(doc.getName(), indices);
                 docNumber++;
+            }
+
+            return searchResults;
+        }
+
+        public Dictionary<Document, SortedDictionary<int, HashSet<long>>> searchSimilarSentences(String sentence, long maxDistance)
+        {
+            // map of document -> (map of levenshtein distance -> sentences indices)
+            Dictionary<Document, SortedDictionary<int, HashSet<long>>> searchResults = new Dictionary<Document, SortedDictionary<int, HashSet<long>>>();
+
+            foreach (Document doc in this.documents.Values)
+            {
+                // map of levenshtein distance -> sentences indices
+                SortedDictionary<int, HashSet<long>> documentResults = new SortedDictionary<int, HashSet<long>>();
+
+                // get indices of sentences that have same n-grams
+                long[] indices = doc.searchTerms(sentence);
+   
+                // calculate Levenshtein distance between found sentences and given one
+                foreach (long sentenceIndex in indices) 
+                {
+                    String otherSentence = doc.getSentences()[(int) sentenceIndex];
+
+                    int distance = LevenshteinDistance.compute(sentence, otherSentence);
+
+                    if (distance < maxDistance) {
+                        if (!documentResults.ContainsKey(distance)) {
+                            documentResults.Add(distance, new HashSet<long>());
+                        }
+
+                        documentResults[distance].Add(sentenceIndex);
+                    }
+                }
+
+                searchResults.Add(doc, documentResults);
             }
 
             return searchResults;

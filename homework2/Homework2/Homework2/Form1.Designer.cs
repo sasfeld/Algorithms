@@ -39,8 +39,16 @@
             this.btnSearchTerm = new System.Windows.Forms.Button();
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtSearchSentences = new System.Windows.Forms.TextBox();
+            this.btnSimilarSentences = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMaxDistance = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -111,26 +119,26 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.txtSearchTermResults);
-            this.panel2.Controls.Add(this.btnSearchTerm);
-            this.panel2.Controls.Add(this.txtSearchTerm);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(13, 221);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(655, 162);
+            this.panel2.Size = new System.Drawing.Size(655, 283);
             this.panel2.TabIndex = 1;
             // 
             // txtSearchTermResults
             // 
             this.txtSearchTermResults.Location = new System.Drawing.Point(249, 43);
             this.txtSearchTermResults.Name = "txtSearchTermResults";
-            this.txtSearchTermResults.Size = new System.Drawing.Size(385, 105);
+            this.txtSearchTermResults.Size = new System.Drawing.Size(385, 230);
             this.txtSearchTermResults.TabIndex = 6;
             this.txtSearchTermResults.Text = "";
             // 
             // btnSearchTerm
             // 
-            this.btnSearchTerm.Location = new System.Drawing.Point(38, 102);
+            this.btnSearchTerm.Location = new System.Drawing.Point(24, 72);
             this.btnSearchTerm.Name = "btnSearchTerm";
             this.btnSearchTerm.Size = new System.Drawing.Size(134, 23);
             this.btnSearchTerm.TabIndex = 8;
@@ -140,7 +148,7 @@
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(13, 55);
+            this.txtSearchTerm.Location = new System.Drawing.Point(12, 22);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(183, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -155,6 +163,61 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Search";
             // 
+            // txtSearchSentences
+            // 
+            this.txtSearchSentences.Location = new System.Drawing.Point(12, 7);
+            this.txtSearchSentences.Name = "txtSearchSentences";
+            this.txtSearchSentences.Size = new System.Drawing.Size(183, 20);
+            this.txtSearchSentences.TabIndex = 9;
+            // 
+            // btnSimilarSentences
+            // 
+            this.btnSimilarSentences.Location = new System.Drawing.Point(24, 69);
+            this.btnSimilarSentences.Name = "btnSimilarSentences";
+            this.btnSimilarSentences.Size = new System.Drawing.Size(134, 23);
+            this.btnSimilarSentences.TabIndex = 10;
+            this.btnSimilarSentences.Text = "Similar sentences";
+            this.btnSimilarSentences.UseVisualStyleBackColor = true;
+            this.btnSimilarSentences.Click += new System.EventHandler(this.btnSimilarSentences_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Max Distance:";
+            // 
+            // txtMaxDistance
+            // 
+            this.txtMaxDistance.Location = new System.Drawing.Point(118, 43);
+            this.txtMaxDistance.Name = "txtMaxDistance";
+            this.txtMaxDistance.Size = new System.Drawing.Size(77, 20);
+            this.txtMaxDistance.TabIndex = 12;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnSearchTerm);
+            this.panel3.Controls.Add(this.txtSearchTerm);
+            this.panel3.Location = new System.Drawing.Point(13, 44);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 105);
+            this.panel3.TabIndex = 13;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnSimilarSentences);
+            this.panel4.Controls.Add(this.txtMaxDistance);
+            this.panel4.Controls.Add(this.txtSearchSentences);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Location = new System.Drawing.Point(13, 166);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 107);
+            this.panel4.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,6 +231,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -185,6 +252,12 @@
         private System.Windows.Forms.TextBox txtSearchTerm;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox txtSearchTermResults;
+        private System.Windows.Forms.Button btnSimilarSentences;
+        private System.Windows.Forms.TextBox txtSearchSentences;
+        private System.Windows.Forms.TextBox txtMaxDistance;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

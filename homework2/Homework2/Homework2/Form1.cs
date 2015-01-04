@@ -198,5 +198,48 @@ namespace Homework2
             
             return sentences[(int) sentenceIndex];
         }
+
+        private void btnSimilarSentences_Click(object sender, EventArgs e)
+        {
+            String inputSentence = txtSearchSentences.Text;
+            long maxDistance = convertToLong(txtMaxDistance.Text);
+
+            Dictionary<Document, SortedDictionary<int, HashSet<long>>> searchResults = DocumentCollection.getInstance().searchSimilarSentences(inputSentence, maxDistance);
+            this.printSimilarSentencesResults(inputSentence, searchResults);
+        }
+
+        protected void printSimilarSentencesResults(String inputSentence, Dictionary<Document, SortedDictionary<int, HashSet<long>>> results)
+        {
+            foreach (Document doc in results.Keys)
+            {
+                SortedDictionary<int, HashSet<long>> similarSentences = results[doc];
+                this.addSearchTermOutput("## Results (sentences indices [Levenshtein similarity]) in document " + doc.getName() + " ##");
+
+                foreach (int levenshteinDistance in similarSentences.Keys)
+                {
+                    this.addSearchTermOutput("--- Levenshtein Distance = " + levenshteinDistance + " ---");
+
+                    HashSet<long> sentenceIndices = similarSentences[levenshteinDistance];
+
+                    String indicesString = "";
+                    foreach (long index in sentenceIndices)
+                    {
+                        if (0 == indicesString.Length % 40)
+                        {
+                            indicesString += "\n";
+                        }
+
+                        indicesString += index + ", ";
+                    }
+                    this.addSearchTermOutput(indicesString);
+
+                    this.addSearchTermOutput("----------------------------------");
+                }
+
+
+                this.addSearchTermOutput("##########################\n");
+                this.addSearchTermOutput(" ");
+            }
+        }
     }
 }
