@@ -71,12 +71,20 @@ namespace Homework2
             // apply own filter
             List<String> preprocessedSentences = new List<String>();
 
+            long sentenceNumber = 0;
             foreach (String sentence in document.getProcessedSentences())
             {
+                if (sentenceNumber % 100 == 0)
+                {
+                    Console.WriteLine("Removing StopWords for sentence " + sentenceNumber + "...");
+                }
+
                 String processedSentence = this.removeStopWords(sentence);
                 processedSentence = this.removeDoubleWhitespaces(processedSentence);
 
-                preprocessedSentences.Add(processedSentence);                                
+                preprocessedSentences.Add(processedSentence);
+
+                sentenceNumber++;
             }
 
             document.setProcessedSentences(preprocessedSentences);
